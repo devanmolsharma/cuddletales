@@ -399,15 +399,17 @@
                                             style={{ display: index === currentStoryIndex ? 'block' : 'none' }}
                                         >
                                             {story.isVideo ? (
-                                                <div className="video-player">
-                                                    <iframe
-                                                        src={story.media}
-                                                        frameborder="0"
-                                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                        allowfullscreen
-                                                        className="w-full h-full"
-                                                    ></iframe>
-                                                </div>
+                                                index === currentStoryIndex && (
+                                                    <div className="video-player">
+                                                        <iframe
+                                                            src={story.media}
+                                                            frameborder="0"
+                                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                            allowfullscreen
+                                                            className="w-full h-full"
+                                                        ></iframe>
+                                                    </div>
+                                                )
                                             ) : (
                                                 <div className="h-full w-full relative ambient-bg">
                                                     <div className="absolute inset-0 flex items-center justify-center">
