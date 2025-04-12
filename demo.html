@@ -4,29 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CuddleTales App Mockup</title>
+    <title>CuddleTales - Family Storytelling Platform</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Comfortaa:wght@400;500;600;700&display=swap');
 
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #fef6f0;
+            background-color: #f9f5f0;
             color: #333;
         }
 
         .title-font {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Comfortaa', cursive;
         }
 
         .app-container {
-            max-width: 414px;
+            width: 100vw;
             margin: 0 auto;
-            height: 736px;
+            height: 95vh;
             position: relative;
             overflow: hidden;
             border-radius: 30px;
@@ -37,16 +37,7 @@
         .story-card {
             background-size: cover;
             background-position: center;
-            height: 180px;
-            position: relative;
-            overflow: hidden;
-            border-radius: 12px;
-        }
-
-        .video-card {
-            background-size: cover;
-            background-position: center;
-            height: 220px;
+            height: 100%;
             position: relative;
             overflow: hidden;
             border-radius: 12px;
@@ -62,22 +53,12 @@
             color: white;
         }
 
-        .video-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
-            padding: 15px;
-            color: white;
-        }
-
         .bottom-nav {
             box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
         }
 
         .active-tab {
-            color: #ec4899;
+            color: #e67e22;
             position: relative;
         }
 
@@ -90,13 +71,13 @@
             width: 6px;
             height: 6px;
             border-radius: 50%;
-            background-color: #ec4899;
+            background-color: #e67e22;
         }
 
         .video-player {
             position: relative;
-            padding-bottom: 56.25%;
-            /* 16:9 aspect ratio */
+            padding-bottom: 177.78%;
+            /* 9:16 aspect ratio for vertical video */
             height: 0;
             overflow: hidden;
         }
@@ -108,6 +89,62 @@
             width: 100%;
             height: 100%;
         }
+
+        .audio-wave {
+            height: 40px;
+            background: linear-gradient(90deg, #e67e22 0%, #d35400 100%);
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20'%3E%3Cpath d='M0,10 Q5,5 10,10 T20,10 T30,10 T40,10 T50,10 T60,10 T70,10 T80,10 T90,10 T100,10' stroke='none' fill='black'/%3E%3C/svg%3E");
+            mask-size: 100% 100%;
+            mask-repeat: no-repeat;
+        }
+
+        .ambient-bg {
+            background: linear-gradient(-45deg, #f39c12, #e74c3c, #3498db, #2ecc71);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .progress-bar {
+            height: 4px;
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: #e67e22;
+            width: 0%;
+        }
+
+        .category-chip {
+            transition: all 0.2s ease;
+        }
+
+        .category-chip:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .room-card {
+            transition: all 0.3s ease;
+        }
+
+        .room-card:hover {
+            transform: scale(1.02);
+        }
     </style>
 </head>
 
@@ -115,308 +152,376 @@
     <div id="app" class="app-container"></div>
 
     <script type="text/babel">
-        const { useState } = React;
+        const { useState, useEffect } = React;
+
+        const stories = [
+            {
+                id: 1,
+                title: "Grandpa's Fishing Adventure",
+                storyteller: "Grandpa Joe",
+                age: "72",
+                relation: "Grandfather",
+                category: "Adventure",
+                culture: "American",
+                duration: "4:32",
+                likes: "1.2K",
+                comments: 42,
+                views: "15.7K",
+                isVideo: true,
+                media: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                audio: null,
+                description: "The time I got lost at sea for 3 days and what it taught me about perseverance",
+                tags: ["fishing", "ocean", "life lessons"],
+                language: "english"
+            },
+            {
+                id: 2,
+                title: "Nani's Diwali Memories",
+                storyteller: "Nani Asha",
+                age: "68",
+                relation: "Grandmother",
+                category: "Cultural",
+                culture: "Indian",
+                duration: "6:15",
+                likes: "3.4K",
+                comments: 128,
+                views: "45.2K",
+                isVideo: false,
+                media: "https://images.unsplash.com/photo-1603653962920-d9d70d7c5a92?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                audio: "https://example.com/audio1.mp3",
+                description: "How we celebrated Diwali in my village when I was a little girl",
+                tags: ["diwali", "india", "festivals"],
+                language: "hindi"
+            },
+            {
+                id: 3,
+                title: "The War Story",
+                storyteller: "Opa Heinrich",
+                age: "89",
+                relation: "Grandfather",
+                category: "Historical",
+                culture: "German",
+                duration: "8:42",
+                likes: "5.7K",
+                comments: 231,
+                views: "89.3K",
+                isVideo: true,
+                media: "https://images.unsplash.com/photo-1518655048521-f130df041f66?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                audio: null,
+                description: "My experiences as a child during WWII and the kindness that saved our family",
+                tags: ["war", "history", "family"],
+                language: "german"
+            }
+        ];
+
+        const categories = [
+            { id: 1, name: "Cultural", icon: "globe-americas", color: "bg-red-100 text-red-800" },
+            { id: 2, name: "Bedtime", icon: "moon", color: "bg-blue-100 text-blue-800" },
+            { id: 3, name: "Moral", icon: "heart", color: "bg-green-100 text-green-800" },
+            { id: 4, name: "Adventure", icon: "map-marked-alt", color: "bg-yellow-100 text-yellow-800" },
+            { id: 5, name: "Historical", icon: "landmark", color: "bg-purple-100 text-purple-800" },
+            { id: 6, name: "Funny", icon: "laugh-squint", color: "bg-pink-100 text-pink-800" }
+        ];
+
+        const rooms = [
+            { id: 1, name: "Cultural Story Circle", members: 124, category: "Cultural", active: true },
+            { id: 2, name: "Funny Grandpas Club", members: 89, category: "Funny", active: true },
+            { id: 3, name: "Bedtime Tales", members: 203, category: "Bedtime", active: false },
+            { id: 4, name: "Life Lessons", members: 156, category: "Moral", active: true }
+        ];
+
+        const rewards = [
+            { id: 1, name: "Storyteller Badge", points: 50, icon: "medal", color: "bg-yellow-100 text-yellow-600" },
+            { id: 2, name: "Cultural Explorer", points: 100, icon: "passport", color: "bg-blue-100 text-blue-600" },
+            { id: 3, name: "Family Historian", points: 200, icon: "book", color: "bg-green-100 text-green-600" },
+            { id: 4, name: "Premium Subscription", points: 500, icon: "crown", color: "bg-purple-100 text-purple-600" }
+        ];
 
         function App() {
-            const [activeTab, setActiveTab] = useState('home');
-            const [language, setLanguage] = useState('english');
-            const [currentStory, setCurrentStory] = useState(null);
-            const [currentVideo, setCurrentVideo] = useState(null);
-            const [showLanguageModal, setShowLanguageModal] = useState(false);
-            const [showStoryModal, setShowStoryModal] = useState(false);
-            const [showVideoModal, setShowVideoModal] = useState(false);
+            const [activeTab, setActiveTab] = useState('feed');
+            const [currentStoryIndex, setCurrentStoryIndex] = useState(0);
+            const [showUploadModal, setShowUploadModal] = useState(false);
+            const [showRoomModal, setShowRoomModal] = useState(false);
+            const [showProfileModal, setShowProfileModal] = useState(false);
+            const [showSettingsModal, setShowSettingsModal] = useState(false);
+            const [isPlaying, setIsPlaying] = useState(false);
+            const [currentTime, setCurrentTime] = useState(0);
+            const [duration, setDuration] = useState(0);
+            const [uploadType, setUploadType] = useState(null);
+            const [uploadProgress, setUploadProgress] = useState(0);
+            const [activeCategory, setActiveCategory] = useState(null);
+            const [activeLanguage, setActiveLanguage] = useState('all');
+            const [childProfiles, setChildProfiles] = useState([
+                { id: 1, name: "Sophia", age: 7, avatar: "child1", categories: ["Bedtime", "Moral"] },
+                { id: 2, name: "Liam", age: 10, avatar: "child2", categories: ["Adventure", "Cultural"] }
+            ]);
+            const [screenTimeLimit, setScreenTimeLimit] = useState(60);
+            const [bedtimeMode, setBedtimeMode] = useState(false);
 
-            const stories = [
-                {
-                    id: 1,
-                    title: "Anansi the Spider",
-                    culture: "West African",
-                    age: "4-8",
-                    languages: ["english", "yoruba"],
-                    image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-                    points: 20,
-                    duration: "8 min"
-                },
-                {
-                    id: 2,
-                    title: "The Dragon's Pearl",
-                    culture: "Chinese",
-                    age: "6-10",
-                    languages: ["english", "mandarin"],
-                    image: "https://images.unsplash.com/photo-1547592180-85f173990554?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-                    points: 25,
-                    duration: "10 min"
-                },
-                {
-                    id: 3,
-                    title: "The Hungry Caterpillar",
-                    culture: "Navajo Adaptation",
-                    age: "3-6",
-                    languages: ["english", "diné"],
-                    image: "https://images.unsplash.com/photo-1518655048521-f130df041f66?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-                    points: 15,
-                    duration: "6 min"
+            const currentStory = stories[currentStoryIndex];
+
+            const handleNextStory = () => {
+                if (currentStoryIndex < stories.length - 1) {
+                    setCurrentStoryIndex(currentStoryIndex + 1);
+                    setIsPlaying(false);
+                    setCurrentTime(0);
                 }
-            ];
+            };
 
-            const shorts = [
-                {
-                    id: 1,
-                    title: "How to Make Tamales",
-                    culture: "Mexican",
-                    duration: "1:23",
-                    views: "1.2K",
-                    thumbnail: "https://images.unsplash.com/photo-1601050690597-df0568f70950?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-                    videoId: "dQw4w9WgXcQ" // Just a placeholder ID
-                },
-                {
-                    id: 2,
-                    title: "African Drum Patterns",
-                    culture: "West African",
-                    duration: "0:45",
-                    views: "2.4K",
-                    thumbnail: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-                    videoId: "dQw4w9WgXcQ"
-                },
-                {
-                    id: 3,
-                    title: "Chinese Calligraphy",
-                    culture: "Chinese",
-                    duration: "1:15",
-                    views: "3.1K",
-                    thumbnail: "https://images.unsplash.com/photo-1527474305487-b87b222841cc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-                    videoId: "dQw4w9WgXcQ"
-                },
-                {
-                    id: 4,
-                    title: "Native American Dance",
-                    culture: "Cherokee",
-                    duration: "0:58",
-                    views: "1.8K",
-                    thumbnail: "https://images.unsplash.com/photo-1545912452-8aea7e25a3d3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-                    videoId: "dQw4w9WgXcQ"
+            const handlePrevStory = () => {
+                if (currentStoryIndex > 0) {
+                    setCurrentStoryIndex(currentStoryIndex - 1);
+                    setIsPlaying(false);
+                    setCurrentTime(0);
                 }
-            ];
-
-            const userPoints = 120;
-
-            const openStory = (story) => {
-                setCurrentStory(story);
-                setShowStoryModal(true);
             };
 
-            const openVideo = (video) => {
-                setCurrentVideo(video);
-                setShowVideoModal(true);
+            const togglePlay = () => {
+                setIsPlaying(!isPlaying);
             };
 
-            const closeStory = () => {
-                setShowStoryModal(false);
+            const handleTimeUpdate = (e) => {
+                setCurrentTime(e.target.currentTime);
+                setDuration(e.target.duration || duration);
             };
 
-            const closeVideo = () => {
-                setShowVideoModal(false);
+            const handleUpload = (type) => {
+                setUploadType(type);
+                setShowUploadModal(true);
+                // Simulate upload progress
+                let progress = 0;
+                const interval = setInterval(() => {
+                    progress += 10;
+                    setUploadProgress(progress);
+                    if (progress >= 100) {
+                        clearInterval(interval);
+                        setTimeout(() => setShowUploadModal(false), 1000);
+                    }
+                }, 300);
             };
 
-            const toggleLanguage = () => {
-                setShowLanguageModal(!showLanguageModal);
+            const formatTime = (seconds) => {
+                const mins = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
             };
 
-            const changeLanguage = (lang) => {
-                setLanguage(lang);
-                setShowLanguageModal(false);
+            const filteredStories = stories.filter(story => {
+                const categoryMatch = !activeCategory || story.category === activeCategory;
+                const languageMatch = activeLanguage === 'all' || story.language === activeLanguage;
+                return categoryMatch && languageMatch;
+            });
+
+            const toggleBedtimeMode = () => {
+                setBedtimeMode(!bedtimeMode);
+                if (!bedtimeMode) {
+                    alert("Bedtime mode activated! Stories will be quieter and screens dimmer.");
+                }
             };
 
             return (
                 <div className="h-full flex flex-col">
                     {/* Header */}
-                    <div className="bg-white p-4 shadow-sm">
+                    <div className="bg-white p-4 shadow-sm z-10">
                         <div className="flex justify-between items-center">
                             <div className="flex items-center">
-                                <i className="fas fa-book-open text-2xl text-pink-500 mr-2"></i>
-                                <span className="title-font text-xl font-bold">Cuddle<span className="text-pink-500">Tales</span></span>
+                                <i className="fas fa-book-open text-2xl text-orange-500 mr-2"></i>
+                                <span className="title-font text-xl font-bold">Cuddle<span className="text-orange-500">Tales</span></span>
                             </div>
                             <div className="flex items-center space-x-3">
-                                <div className="bg-pink-100 px-3 py-1 rounded-full flex items-center">
-                                    <i className="fas fa-coins text-yellow-500 mr-1"></i>
-                                    <span className="text-sm font-medium">{userPoints}</span>
-                                </div>
+                                <button
+                                    className="bg-orange-100 px-3 py-1 rounded-full flex items-center"
+                                    onClick={() => setShowProfileModal(true)}
+                                >
+                                    <i className="fas fa-user text-orange-500 mr-1"></i>
+                                    <span className="text-sm font-medium">Family</span>
+                                </button>
                                 <button
                                     className="bg-gray-100 w-8 h-8 rounded-full flex items-center justify-center"
-                                    onClick={toggleLanguage}
+                                    onClick={() => setShowSettingsModal(true)}
                                 >
-                                    <i className="fas fa-language text-gray-600"></i>
+                                    <i className="fas fa-cog text-gray-600"></i>
                                 </button>
                             </div>
                         </div>
                     </div>
 
                     {/* Main Content */}
-                    <div className="flex-1 overflow-y-auto p-4">
-                        {activeTab === 'home' && (
-                            <div>
-                                <h2 className="title-font text-2xl font-bold mb-4">Today's Stories</h2>
-
-                                <div className="mb-6">
-                                    <div className="flex justify-between items-center mb-3">
-                                        <h3 className="font-bold">For Your 5-Year-Old</h3>
-                                        <button className="text-pink-500 text-sm">See All</button>
-                                    </div>
-                                    <div className="grid grid-cols-2 gap-3">
-                                        {stories.map(story => (
-                                            <div
-                                                key={story.id}
-                                                className="story-card"
-                                                style={{ backgroundImage: `url(${story.image})` }}
-                                                onClick={() => openStory(story)}
-                                            >
-                                                <div className="story-overlay">
-                                                    <h3 className="title-font font-bold text-sm">{story.title}</h3>
-                                                    <div className="flex justify-between items-center mt-1">
-                                                        <span className="text-xs bg-black bg-opacity-30 px-2 py-1 rounded">{story.age}</span>
-                                                        <span className="text-xs flex items-center">
-                                                            <i className="fas fa-coins text-yellow-400 mr-1"></i>
-                                                            {story.points}
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-
-                                <div className="mb-6">
-                                    <div className="flex justify-between items-center mb-3">
-                                        <h3 className="font-bold">Cultural Shorts</h3>
-                                        <button className="text-pink-500 text-sm">See All</button>
-                                    </div>
-                                    <div className="flex space-x-3 overflow-x-auto pb-2">
-                                        {shorts.map(video => (
-                                            <div
-                                                key={video.id}
-                                                className="video-card flex-shrink-0 w-40"
-                                                style={{ backgroundImage: `url(${video.thumbnail})` }}
-                                                onClick={() => openVideo(video)}
-                                            >
-                                                <div className="absolute top-2 right-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
-                                                    {video.duration}
-                                                </div>
-                                                <div className="video-overlay">
-                                                    <h3 className="font-bold text-sm">{video.title}</h3>
-                                                    <div className="flex justify-between items-center mt-1">
-                                                        <span className="text-xs">{video.views} views</span>
-                                                        <span className="text-xs bg-black bg-opacity-30 px-2 py-1 rounded">{video.culture}</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-
-                                <div className="mb-6">
-                                    <div className="flex justify-between items-center mb-3">
-                                        <h3 className="font-bold">Cultural Activities</h3>
-                                        <button className="text-pink-500 text-sm">See All</button>
-                                    </div>
-                                    <div className="grid grid-cols-2 gap-3">
-                                        <div className="bg-blue-50 rounded-xl p-4">
-                                            <div className="bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center mb-2">
-                                                <i className="fas fa-utensils text-blue-500"></i>
-                                            </div>
-                                            <h4 className="font-bold text-sm">Make Dumplings</h4>
-                                            <p className="text-xs text-gray-600">Chinese New Year</p>
-                                        </div>
-                                        <div className="bg-yellow-50 rounded-xl p-4">
-                                            <div className="bg-yellow-100 w-10 h-10 rounded-full flex items-center justify-center mb-2">
-                                                <i className="fas fa-music text-yellow-500"></i>
-                                            </div>
-                                            <h4 className="font-bold text-sm">Learn a Folksong</h4>
-                                            <p className="text-xs text-gray-600">Yoruba Culture</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
-
-                        {activeTab === 'explore' && (
-                            <div>
-                                <h2 className="title-font text-2xl font-bold mb-4">Explore Cultures</h2>
-                                <div className="grid grid-cols-2 gap-3">
-                                    <div className="bg-gradient-to-br from-red-100 to-orange-100 rounded-xl p-4 h-32 flex flex-col justify-end">
-                                        <h3 className="font-bold">West African</h3>
-                                        <p className="text-xs">12 stories</p>
-                                    </div>
-                                    <div className="bg-gradient-to-br from-blue-100 to-purple-100 rounded-xl p-4 h-32 flex flex-col justify-end">
-                                        <h3 className="font-bold">Chinese</h3>
-                                        <p className="text-xs">8 stories</p>
-                                    </div>
-                                    <div className="bg-gradient-to-br from-green-100 to-teal-100 rounded-xl p-4 h-32 flex flex-col justify-end">
-                                        <h3 className="font-bold">Mexican</h3>
-                                        <p className="text-xs">5 stories</p>
-                                    </div>
-                                    <div className="bg-gradient-to-br from-yellow-100 to-amber-100 rounded-xl p-4 h-32 flex flex-col justify-end">
-                                        <h3 className="font-bold">Native American</h3>
-                                        <p className="text-xs">7 stories</p>
-                                    </div>
-                                </div>
-
-                                <h2 className="title-font text-2xl font-bold my-4">Popular Shorts</h2>
-                                <div className="grid grid-cols-2 gap-3">
-                                    {shorts.map(video => (
+                    <div className="flex-1 overflow-hidden relative">
+                        {activeTab === 'feed' && (
+                            <div className="h-full relative">
+                                {/* Vertical Story Feed */}
+                                <div className="h-full snap-y snap-mandatory overflow-y-auto">
+                                    {filteredStories.map((story, index) => (
                                         <div
-                                            key={video.id}
-                                            className="video-card"
-                                            style={{ backgroundImage: `url(${video.thumbnail})` }}
-                                            onClick={() => openVideo(video)}
+                                            key={story.id}
+                                            className="h-full w-full snap-start relative"
+                                            style={{ display: index === currentStoryIndex ? 'block' : 'none' }}
                                         >
-                                            <div className="absolute top-2 right-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
-                                                {video.duration}
-                                            </div>
-                                            <div className="video-overlay">
-                                                <h3 className="font-bold text-sm">{video.title}</h3>
-                                                <div className="flex justify-between items-center mt-1">
-                                                    <span className="text-xs">{video.views} views</span>
-                                                    <span className="text-xs bg-black bg-opacity-30 px-2 py-1 rounded">{video.culture}</span>
+                                            {story.isVideo ? (
+                                                <div className="video-player">
+                                                    <img
+                                                        src={story.media}
+                                                        alt={story.title}
+                                                        className="w-full h-full object-cover"
+                                                    />
+                                                </div>
+                                            ) : (
+                                                <div className="h-full w-full relative ambient-bg">
+                                                    <div className="absolute inset-0 flex items-center justify-center">
+                                                        <div className="text-center p-6">
+                                                            <h2 className="title-font text-3xl font-bold text-white mb-2">{story.title}</h2>
+                                                            <p className="text-white text-lg mb-6">{story.storyteller}, {story.age}</p>
+                                                            <div className="audio-wave w-full mb-6"></div>
+                                                            <div className="flex justify-center space-x-8 text-white">
+                                                                <button className="flex flex-col items-center">
+                                                                    <i className="fas fa-heart text-2xl mb-1"></i>
+                                                                    <span className="text-xs">{story.likes}</span>
+                                                                </button>
+                                                                <button className="flex flex-col items-center">
+                                                                    <i className="fas fa-comment text-2xl mb-1"></i>
+                                                                    <span className="text-xs">{story.comments}</span>
+                                                                </button>
+                                                                <button className="flex flex-col items-center">
+                                                                    <i className="fas fa-share text-2xl mb-1"></i>
+                                                                    <span className="text-xs">Share</span>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    {!isPlaying && (
+                                                        <button
+                                                            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-orange-500 bg-opacity-80 text-white w-16 h-16 rounded-full flex items-center justify-center"
+                                                            onClick={togglePlay}
+                                                        >
+                                                            <i className="fas fa-play text-2xl"></i>
+                                                        </button>
+                                                    )}
+                                                </div>
+                                            )}
+
+                                            {/* Story Info Overlay */}
+                                            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4 pt-10 text-white">
+                                                <h2 className="text-xl font-bold mb-1">{story.title}</h2>
+                                                <div className="flex items-center space-x-3 mb-2">
+                                                    <span className="bg-orange-500 text-white px-2 py-1 rounded-full text-xs">
+                                                        {story.category}
+                                                    </span>
+                                                    <span className="text-gray-300 text-sm">
+                                                        <i className="fas fa-user mr-1"></i>
+                                                        {story.storyteller}, {story.age}
+                                                    </span>
+                                                    <span className="text-gray-300 text-sm">
+                                                        <i className="fas fa-eye mr-1"></i>
+                                                        {story.views}
+                                                    </span>
+                                                </div>
+
+                                                {/* Progress Bar */}
+                                                <div className="progress-bar w-full mt-2">
+                                                    <div
+                                                        className="progress-fill"
+                                                        style={{ width: `${(currentTime / duration) * 100}%` }}
+                                                    ></div>
+                                                </div>
+                                                <div className="flex justify-between text-xs text-gray-300 mt-1">
+                                                    <span>{formatTime(currentTime)}</span>
+                                                    <span>{formatTime(duration)}</span>
+                                                </div>
+
+                                                {/* Description */}
+                                                <div className="mt-2 text-sm text-gray-300">
+                                                    <p className="line-clamp-2">{story.description}</p>
+                                                </div>
+
+                                                {/* Tags */}
+                                                <div className="flex flex-wrap mt-2">
+                                                    {story.tags.map(tag => (
+                                                        <span key={tag} className="bg-black bg-opacity-30 text-white px-2 py-1 rounded-full text-xs mr-1 mb-1">
+                                                            #{tag}
+                                                        </span>
+                                                    ))}
                                                 </div>
                                             </div>
+
+                                            {/* Navigation Arrows */}
+                                            <button
+                                                onClick={handlePrevStory}
+                                                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white w-10 h-10 rounded-full flex items-center justify-center z-10"
+                                                disabled={currentStoryIndex === 0}
+                                            >
+                                                <i className="fas fa-chevron-up"></i>
+                                            </button>
+                                            <button
+                                                onClick={handleNextStory}
+                                                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white w-10 h-10 rounded-full flex items-center justify-center z-10"
+                                                disabled={currentStoryIndex === filteredStories.length - 1}
+                                            >
+                                                <i className="fas fa-chevron-down"></i>
+                                            </button>
                                         </div>
                                     ))}
                                 </div>
+
+                                {/* Categories Filter */}
+                                <div className="absolute top-4 left-0 right-0 px-4 z-10">
+                                    <div className="flex space-x-2 overflow-x-auto pb-2">
+                                        {categories.map(category => (
+                                            <button
+                                                key={category.id}
+                                                className={`category-chip flex-shrink-0 px-3 py-1 rounded-full text-sm ${activeCategory === category.name ? 'bg-orange-500 text-white' : category.color}`}
+                                                onClick={() => setActiveCategory(activeCategory === category.name ? null : category.name)}
+                                            >
+                                                <i className={`fas fa-${category.icon} mr-1`}></i>
+                                                {category.name}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
                             </div>
                         )}
 
-                        {activeTab === 'family' && (
-                            <div>
-                                <h2 className="title-font text-2xl font-bold mb-4">Family Stories</h2>
-                                <div className="bg-pink-50 rounded-xl p-4 mb-4">
-                                    <div className="flex items-center mb-3">
-                                        <div className="bg-pink-100 w-12 h-12 rounded-full flex items-center justify-center mr-3">
-                                            <i className="fas fa-plus text-pink-500"></i>
+                        {activeTab === 'connect' && (
+                            <div className="p-4 overflow-y-auto h-full">
+                                <h2 className="title-font text-2xl font-bold mb-4">Virtual Connect Rooms</h2>
+                                <p className="text-gray-600 mb-4">Join live storytelling sessions with elders from around the world</p>
+
+                                <div className="grid grid-cols-2 gap-3 mb-6">
+                                    {rooms.map(room => (
+                                        <div
+                                            key={room.id}
+                                            className="room-card bg-white border rounded-lg p-4 flex flex-col items-center text-center"
+                                            onClick={() => setShowRoomModal(true)}
+                                        >
+                                            <div className={`w-16 h-16 rounded-full ${room.active ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-600'} flex items-center justify-center mb-2`}>
+                                                <i className={`fas fa-${room.active ? 'users' : 'users-slash'} text-2xl`}></i>
+                                            </div>
+                                            <h3 className="font-bold">{room.name}</h3>
+                                            <p className="text-xs text-gray-600">{room.category}</p>
+                                            <div className="flex items-center mt-2 text-xs">
+                                                <i className="fas fa-user-friends mr-1"></i>
+                                                {room.members} members
+                                            </div>
+                                            <button className={`mt-3 w-full py-1 rounded-full text-xs ${room.active ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-500'}`}>
+                                                {room.active ? 'Join Room' : 'Coming Soon'}
+                                            </button>
                                         </div>
-                                        <div>
-                                            <h3 className="font-bold">Add Your Family Story</h3>
-                                            <p className="text-xs text-gray-600">Record or upload your own traditions</p>
-                                        </div>
-                                    </div>
+                                    ))}
                                 </div>
 
-                                <div className="space-y-3">
-                                    <div className="bg-white border rounded-lg p-3 flex items-center">
-                                        <div className="bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center mr-3">
-                                            <i className="fas fa-microphone text-blue-500"></i>
+                                <h2 className="title-font text-2xl font-bold mb-4">Upcoming Events</h2>
+                                <div className="bg-orange-50 rounded-xl p-4 mb-3">
+                                    <div className="flex items-start">
+                                        <div className="bg-orange-100 w-12 h-12 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                                            <i className="fas fa-calendar-day text-orange-500"></i>
                                         </div>
                                         <div>
-                                            <h3 className="font-bold text-sm">Grandma's Recipe</h3>
-                                            <p className="text-xs text-gray-600">Recorded 2 weeks ago</p>
-                                        </div>
-                                    </div>
-                                    <div className="bg-white border rounded-lg p-3 flex items-center">
-                                        <div className="bg-purple-100 w-10 h-10 rounded-full flex items-center justify-center mr-3">
-                                            <i className="fas fa-image text-purple-500"></i>
-                                        </div>
-                                        <div>
-                                            <h3 className="font-bold text-sm">Our Diwali</h3>
-                                            <p className="text-xs text-gray-600">Photo story</p>
+                                            <h3 className="font-bold">Grandparents Day Celebration</h3>
+                                            <p className="text-sm text-gray-600 mb-2">September 10, 2023 • 4PM EST</p>
+                                            <p className="text-xs">Special storytelling session with elders from 5 continents</p>
+                                            <button className="mt-2 bg-orange-500 text-white text-xs py-1 px-3 rounded-full">
+                                                Remind Me
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -424,49 +529,54 @@
                         )}
 
                         {activeTab === 'rewards' && (
-                            <div>
+                            <div className="p-4 overflow-y-auto h-full">
                                 <h2 className="title-font text-2xl font-bold mb-4">Your Rewards</h2>
-                                <div className="bg-gradient-to-r from-yellow-100 to-yellow-50 rounded-xl p-4 mb-6">
-                                    <div className="flex justify-between items-center">
+
+                                <div className="bg-gradient-to-r from-orange-100 to-amber-50 rounded-xl p-4 mb-6">
+                                    <div className="flex justify-between items-center mb-2">
                                         <div>
                                             <h3 className="font-bold">CuddlePoints</h3>
-                                            <p className="text-sm">Earn more to unlock rewards!</p>
+                                            <p className="text-sm">Earn points by listening, sharing, and creating stories</p>
                                         </div>
-                                        <div className="text-2xl font-bold text-yellow-600">{userPoints}</div>
+                                        <div className="text-2xl font-bold text-orange-600">1,250</div>
                                     </div>
-                                    <div className="w-full bg-yellow-200 rounded-full h-2 mt-3">
-                                        <div className="bg-yellow-500 h-2 rounded-full" style={{ width: `${Math.min(100, (userPoints / 250) * 100)}%` }}></div>
+                                    <div className="w-full bg-orange-200 rounded-full h-2">
+                                        <div className="bg-orange-500 h-2 rounded-full" style={{ width: '65%' }}></div>
                                     </div>
+                                    <p className="text-xs text-orange-700 mt-1">650 points to next reward</p>
                                 </div>
 
                                 <h3 className="font-bold mb-3">Available Rewards</h3>
-                                <div className="grid grid-cols-2 gap-3">
-                                    <div className={`border rounded-xl p-3 ${userPoints >= 50 ? 'bg-white' : 'bg-gray-50 opacity-60'}`}>
-                                        <div className="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-2">
-                                            <i className="fas fa-sticky-note text-blue-500"></i>
+                                <div className="grid grid-cols-2 gap-3 mb-6">
+                                    {rewards.map(reward => (
+                                        <div key={reward.id} className="bg-white border rounded-xl p-3 flex flex-col items-center">
+                                            <div className={`${reward.color} w-12 h-12 rounded-full flex items-center justify-center mb-2`}>
+                                                <i className={`fas fa-${reward.icon} text-xl`}></i>
+                                            </div>
+                                            <h4 className="font-bold text-sm text-center">{reward.name}</h4>
+                                            <p className="text-xs text-center mb-2">{reward.points} points</p>
+                                            <button className={`w-full mt-auto py-1 rounded-full text-xs ${reward.points <= 1250 ? 'bg-orange-500 text-white' : 'bg-gray-200 text-gray-500'}`}>
+                                                {reward.points <= 1250 ? 'Redeem' : 'Need ' + (reward.points - 1250) + ' more'}
+                                            </button>
                                         </div>
-                                        <h4 className="font-bold text-sm text-center">Sticker Pack</h4>
-                                        <p className="text-xs text-center">50 points</p>
-                                        <button
-                                            className={`w-full mt-2 py-1 rounded-full text-xs ${userPoints >= 50 ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-500'}`}
-                                            disabled={userPoints < 50}
-                                        >
-                                            {userPoints >= 50 ? 'Redeem' : 'Need ' + (50 - userPoints) + ' more'}
-                                        </button>
-                                    </div>
-                                    <div className={`border rounded-xl p-3 ${userPoints >= 100 ? 'bg-white' : 'bg-gray-50 opacity-60'}`}>
-                                        <div className="bg-green-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-2">
-                                            <i className="fas fa-tshirt text-green-500"></i>
+                                    ))}
+                                </div>
+
+                                <h3 className="font-bold mb-3">Monthly Competitions</h3>
+                                <div className="bg-white border rounded-xl p-4 mb-4">
+                                    <div className="flex items-center mb-3">
+                                        <div className="bg-purple-100 w-10 h-10 rounded-full flex items-center justify-center mr-3">
+                                            <i className="fas fa-trophy text-purple-500"></i>
                                         </div>
-                                        <h4 className="font-bold text-sm text-center">Cultural Outfit</h4>
-                                        <p className="text-xs text-center">100 points</p>
-                                        <button
-                                            className={`w-full mt-2 py-1 rounded-full text-xs ${userPoints >= 100 ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-500'}`}
-                                            disabled={userPoints < 100}
-                                        >
-                                            {userPoints >= 100 ? 'Redeem' : 'Need ' + (100 - userPoints) + ' more'}
-                                        </button>
+                                        <div>
+                                            <h4 className="font-bold">Best Cultural Story</h4>
+                                            <p className="text-xs text-gray-600">Submit by August 31st</p>
+                                        </div>
                                     </div>
+                                    <p className="text-sm mb-3">Share your family's cultural traditions for a chance to win premium features</p>
+                                    <button className="w-full bg-purple-500 text-white py-2 rounded-lg text-sm font-medium">
+                                        Enter Competition
+                                    </button>
                                 </div>
                             </div>
                         )}
@@ -475,181 +585,406 @@
                     {/* Bottom Navigation */}
                     <div className="bottom-nav bg-white p-3 flex justify-around">
                         <button
-                            className={`flex flex-col items-center ${activeTab === 'home' ? 'active-tab' : 'text-gray-500'}`}
-                            onClick={() => setActiveTab('home')}
+                            className={`flex flex-col items-center ${activeTab === 'feed' ? 'active-tab' : 'text-gray-500'}`}
+                            onClick={() => setActiveTab('feed')}
                         >
-                            <i className="fas fa-home text-xl"></i>
-                            <span className="text-xs mt-1">Home</span>
+                            <i className="fas fa-compass text-xl"></i>
+                            <span className="text-xs mt-1">Discover</span>
                         </button>
                         <button
-                            className={`flex flex-col items-center ${activeTab === 'explore' ? 'active-tab' : 'text-gray-500'}`}
-                            onClick={() => setActiveTab('explore')}
-                        >
-                            <i className="fas fa-globe-americas text-xl"></i>
-                            <span className="text-xs mt-1">Explore</span>
-                        </button>
-                        <button
-                            className={`flex flex-col items-center ${activeTab === 'family' ? 'active-tab' : 'text-gray-500'}`}
-                            onClick={() => setActiveTab('family')}
+                            className={`flex flex-col items-center ${activeTab === 'connect' ? 'active-tab' : 'text-gray-500'}`}
+                            onClick={() => setActiveTab('connect')}
                         >
                             <i className="fas fa-users text-xl"></i>
-                            <span className="text-xs mt-1">Family</span>
+                            <span className="text-xs mt-1">Connect</span>
+                        </button>
+                        <button
+                            className="flex flex-col items-center text-white bg-orange-500 w-14 h-14 rounded-full justify-center"
+                            onClick={() => setShowUploadModal(true)}
+                        >
+                            <i className="fas fa-plus text-xl"></i>
                         </button>
                         <button
                             className={`flex flex-col items-center ${activeTab === 'rewards' ? 'active-tab' : 'text-gray-500'}`}
                             onClick={() => setActiveTab('rewards')}
                         >
-                            <i className="fas fa-trophy text-xl"></i>
+                            <i className="fas fa-gift text-xl"></i>
                             <span className="text-xs mt-1">Rewards</span>
+                        </button>
+                        <button
+                            className={`flex flex-col items-center ${activeTab === 'profile' ? 'active-tab' : 'text-gray-500'}`}
+                            onClick={() => setShowProfileModal(true)}
+                        >
+                            <i className="fas fa-user text-xl"></i>
+                            <span className="text-xs mt-1">Profile</span>
                         </button>
                     </div>
 
-                    {/* Language Modal */}
-                    {showLanguageModal && (
-                        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+                    {/* Upload Modal */}
+                    {showUploadModal && (
+                        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-20">
                             <div className="bg-white rounded-xl p-6 w-full max-w-sm">
-                                <h3 className="title-font text-xl font-bold mb-4">Select Language</h3>
-                                <div className="space-y-2">
-                                    <button
-                                        className={`w-full text-left p-3 rounded-lg ${language === 'english' ? 'bg-pink-100 border-pink-300' : 'bg-gray-50'}`}
-                                        onClick={() => changeLanguage('english')}
-                                    >
-                                        English
-                                    </button>
-                                    <button
-                                        className={`w-full text-left p-3 rounded-lg ${language === 'yoruba' ? 'bg-pink-100 border-pink-300' : 'bg-gray-50'}`}
-                                        onClick={() => changeLanguage('yoruba')}
-                                    >
-                                        Yoruba
-                                    </button>
-                                    <button
-                                        className={`w-full text-left p-3 rounded-lg ${language === 'mandarin' ? 'bg-pink-100 border-pink-300' : 'bg-gray-50'}`}
-                                        onClick={() => changeLanguage('mandarin')}
-                                    >
-                                        Mandarin
-                                    </button>
-                                </div>
-                                <button
-                                    className="mt-6 w-full bg-pink-500 text-white py-3 rounded-lg font-medium"
-                                    onClick={toggleLanguage}
-                                >
-                                    Done
-                                </button>
+                                {uploadType ? (
+                                    <div>
+                                        <h3 className="title-font text-xl font-bold mb-4">
+                                            {uploadType === 'video' ? 'Upload Video Story' : 'Record Audio Story'}
+                                        </h3>
+
+                                        {uploadProgress < 100 ? (
+                                            <div className="text-center">
+                                                <div className="w-24 h-24 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                                    <i className={`fas fa-${uploadType === 'video' ? 'video' : 'microphone'} text-orange-500 text-2xl`}></i>
+                                                </div>
+                                                <p className="mb-4">{uploadType === 'video' ? 'Uploading your video...' : 'Preparing to record...'}</p>
+                                                <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
+                                                    <div
+                                                        className="bg-orange-500 h-2 rounded-full"
+                                                        style={{ width: `${uploadProgress}%` }}
+                                                    ></div>
+                                                </div>
+                                                <p className="text-sm text-gray-600">{uploadProgress}% complete</p>
+                                            </div>
+                                        ) : (
+                                            <div>
+                                                <div className="mb-4">
+                                                    <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
+                                                    <input
+                                                        type="text"
+                                                        className="w-full p-2 border rounded-lg"
+                                                        placeholder="Our family tradition..."
+                                                    />
+                                                </div>
+                                                <div className="mb-4">
+                                                    <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                                                    <textarea
+                                                        className="w-full p-2 border rounded-lg"
+                                                        rows="3"
+                                                        placeholder="Tell us about this story..."
+                                                    ></textarea>
+                                                </div>
+                                                <div className="mb-4">
+                                                    <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
+                                                    <select className="w-full p-2 border rounded-lg">
+                                                        {categories.map(category => (
+                                                            <option key={category.id} value={category.name}>
+                                                                {category.name}
+                                                            </option>
+                                                        ))}
+                                                    </select>
+                                                </div>
+                                                <div className="mb-4">
+                                                    <label className="block text-sm font-medium text-gray-700 mb-1">Tags (comma separated)</label>
+                                                    <input
+                                                        type="text"
+                                                        className="w-full p-2 border rounded-lg"
+                                                        placeholder="family, tradition, holiday"
+                                                    />
+                                                </div>
+                                                <div className="flex space-x-3">
+                                                    <button
+                                                        className="flex-1 bg-gray-200 text-gray-800 py-2 rounded-lg font-medium"
+                                                        onClick={() => setShowUploadModal(false)}
+                                                    >
+                                                        Cancel
+                                                    </button>
+                                                    <button
+                                                        className="flex-1 bg-orange-500 text-white py-2 rounded-lg font-medium"
+                                                        onClick={() => setShowUploadModal(false)}
+                                                    >
+                                                        Publish Story
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+                                ) : (
+                                    <div>
+                                        <h3 className="title-font text-xl font-bold mb-6">Share Your Family Story</h3>
+                                        <div className="grid grid-cols-2 gap-4 mb-6">
+                                            <button
+                                                className="bg-blue-50 p-4 rounded-xl flex flex-col items-center"
+                                                onClick={() => handleUpload('video')}
+                                            >
+                                                <div className="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mb-2">
+                                                    <i className="fas fa-video text-blue-500"></i>
+                                                </div>
+                                                <span className="font-medium">Upload Video</span>
+                                            </button>
+                                            <button
+                                                className="bg-orange-50 p-4 rounded-xl flex flex-col items-center"
+                                                onClick={() => handleUpload('audio')}
+                                            >
+                                                <div className="bg-orange-100 w-12 h-12 rounded-full flex items-center justify-center mb-2">
+                                                    <i className="fas fa-microphone text-orange-500"></i>
+                                                </div>
+                                                <span className="font-medium">Record Audio</span>
+                                            </button>
+                                        </div>
+                                        <button
+                                            className="w-full bg-gray-200 text-gray-800 py-3 rounded-lg font-medium"
+                                            onClick={() => setShowUploadModal(false)}
+                                        >
+                                            Cancel
+                                        </button>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     )}
 
-                    {/* Story Modal */}
-                    {showStoryModal && currentStory && (
-                        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
-                            <div className="bg-white rounded-xl w-full h-full max-w-sm max-h-[90vh] flex flex-col">
-                                <div className="relative h-48">
-                                    <img
-                                        src={currentStory.image}
-                                        alt={currentStory.title}
-                                        className="w-full h-full object-cover rounded-t-xl"
-                                    />
+                    {/* Room Modal */}
+                    {showRoomModal && (
+                        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-20">
+                            <div className="bg-white rounded-xl p-6 w-full max-w-sm">
+                                <h3 className="title-font text-xl font-bold mb-4">Cultural Story Circle</h3>
+                                <div className="flex items-center mb-4">
+                                    <div className="bg-green-100 w-10 h-10 rounded-full flex items-center justify-center mr-3">
+                                        <i className="fas fa-users text-green-500"></i>
+                                    </div>
+                                    <div>
+                                        <h4 className="font-bold">124 members active</h4>
+                                        <p className="text-xs text-gray-600">Hosted by Grandma Maria</p>
+                                    </div>
+                                </div>
+                                <p className="mb-4">Join this live session where elders share traditional stories from their cultures. Ask questions and share your own family stories!</p>
+
+                                <div className="mb-6">
+                                    <h4 className="font-bold mb-2">Upcoming Stories</h4>
+                                    <div className="space-y-2">
+                                        <div className="flex items-center">
+                                            <div className="bg-orange-100 w-8 h-8 rounded-full flex items-center justify-center mr-2">
+                                                <i className="fas fa-book-open text-orange-500 text-xs"></i>
+                                            </div>
+                                            <span className="text-sm">4:00 PM - Anansi tales (Ghana)</span>
+                                        </div>
+                                        <div className="flex items-center">
+                                            <div className="bg-blue-100 w-8 h-8 rounded-full flex items-center justify-center mr-2">
+                                                <i className="fas fa-book-open text-blue-500 text-xs"></i>
+                                            </div>
+                                            <span className="text-sm">4:30 PM - Diwali memories (India)</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="flex space-x-3">
                                     <button
-                                        className="absolute top-4 right-4 bg-black bg-opacity-50 text-white w-8 h-8 rounded-full flex items-center justify-center"
-                                        onClick={closeStory}
+                                        className="flex-1 bg-gray-200 text-gray-800 py-2 rounded-lg font-medium"
+                                        onClick={() => setShowRoomModal(false)}
+                                    >
+                                        Cancel
+                                    </button>
+                                    <button
+                                        className="flex-1 bg-orange-500 text-white py-2 rounded-lg font-medium"
+                                        onClick={() => setShowRoomModal(false)}
+                                    >
+                                        Join Room
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Profile & Settings Modal */}
+                    {showProfileModal && (
+                        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-20">
+                            <div className="bg-white rounded-xl p-6 w-full max-w-sm max-h-[90vh] overflow-y-auto">
+                                <div className="flex justify-between items-center mb-6">
+                                    <h3 className="title-font text-xl font-bold">Family Profiles</h3>
+                                    <button
+                                        className="text-gray-500"
+                                        onClick={() => setShowProfileModal(false)}
                                     >
                                         <i className="fas fa-times"></i>
                                     </button>
                                 </div>
-                                <div className="p-4 flex-1 overflow-y-auto">
-                                    <h2 className="title-font text-2xl font-bold">{currentStory.title}</h2>
-                                    <div className="flex items-center space-x-4 my-3">
-                                        <span className="bg-pink-100 text-pink-800 px-2 py-1 rounded-full text-xs">
-                                            {currentStory.culture}
-                                        </span>
-                                        <span className="text-gray-600 text-sm">
-                                            <i className="fas fa-clock mr-1"></i>
-                                            {currentStory.duration}
-                                        </span>
-                                        <span className="text-yellow-600 text-sm">
-                                            <i className="fas fa-coins mr-1"></i>
-                                            {currentStory.points} pts
-                                        </span>
-                                    </div>
-                                    <p className="text-gray-700 mb-4">
-                                        This traditional {currentStory.culture.toLowerCase()} folktale teaches important values through the adventures of {currentStory.title.includes('Anansi') ? 'the clever spider Anansi' : currentStory.title.includes('Dragon') ? 'a magical dragon' : 'a hungry caterpillar'}.
-                                    </p>
-                                    <div className="mb-4">
-                                        <h3 className="font-bold mb-2">Cultural Connections:</h3>
-                                        <ul className="list-disc pl-5 text-gray-700 text-sm space-y-1">
-                                            <li>Teaches traditional {currentStory.culture.split(' ')[0].toLowerCase()} values</li>
-                                            <li>Includes {currentStory.languages.filter(l => l !== 'english').join('/')} vocabulary</li>
-                                            <li>Connects to real-world traditions</li>
-                                        </ul>
+
+                                <div className="mb-6">
+                                    <h4 className="font-bold mb-3">Child Profiles</h4>
+                                    <div className="space-y-3">
+                                        {childProfiles.map(child => (
+                                            <div key={child.id} className="bg-gray-50 rounded-lg p-3 flex items-center">
+                                                <div className="bg-orange-100 w-10 h-10 rounded-full flex items-center justify-center mr-3">
+                                                    <i className="fas fa-child text-orange-500"></i>
+                                                </div>
+                                                <div className="flex-1">
+                                                    <h5 className="font-bold">{child.name}, {child.age}</h5>
+                                                    <p className="text-xs text-gray-600">
+                                                        Categories: {child.categories.join(', ')}
+                                                    </p>
+                                                </div>
+                                                <button className="text-gray-500">
+                                                    <i className="fas fa-ellipsis-v"></i>
+                                                </button>
+                                            </div>
+                                        ))}
+                                        <button className="w-full border-2 border-dashed border-gray-300 rounded-lg py-3 flex items-center justify-center text-gray-500">
+                                            <i className="fas fa-plus mr-2"></i>
+                                            Add Child Profile
+                                        </button>
                                     </div>
                                 </div>
-                                <div className="p-4 border-t">
-                                    <button className="w-full bg-pink-500 text-white py-3 rounded-lg font-medium flex items-center justify-center">
-                                        <i className="fas fa-play mr-2"></i> Read Story
+
+                                <div className="mb-6">
+                                    <h4 className="font-bold mb-3">Elder Dashboard</h4>
+                                    <div className="bg-orange-50 rounded-lg p-4">
+                                        <div className="flex items-center mb-3">
+                                            <div className="bg-orange-100 w-10 h-10 rounded-full flex items-center justify-center mr-3">
+                                                <i className="fas fa-user-tie text-orange-500"></i>
+                                            </div>
+                                            <div>
+                                                <h5 className="font-bold">Grandma Maria</h5>
+                                                <p className="text-xs text-gray-600">Storyteller since 2022</p>
+                                            </div>
+                                        </div>
+                                        <div className="grid grid-cols-3 gap-2 text-center">
+                                            <div className="bg-white p-2 rounded">
+                                                <div className="text-orange-500 font-bold">24</div>
+                                                <div className="text-xs">Stories</div>
+                                            </div>
+                                            <div className="bg-white p-2 rounded">
+                                                <div className="text-orange-500 font-bold">1.2K</div>
+                                                <div className="text-xs">Likes</div>
+                                            </div>
+                                            <div className="bg-white p-2 rounded">
+                                                <div className="text-orange-500 font-bold">$45</div>
+                                                <div className="text-xs">Earnings</div>
+                                            </div>
+                                        </div>
+                                        <button className="w-full mt-3 bg-orange-500 text-white py-2 rounded-lg text-sm">
+                                            View Dashboard
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h4 className="font-bold mb-3">Subscription</h4>
+                                    <div className="bg-purple-50 rounded-lg p-4">
+                                        <div className="flex items-center mb-2">
+                                            <i className="fas fa-crown text-purple-500 mr-2"></i>
+                                            <h5 className="font-bold">CuddleTales Premium</h5>
+                                        </div>
+                                        <p className="text-xs text-gray-600 mb-3">Unlock all stories, ad-free experience, and support elder storytellers</p>
+                                        <button className="w-full bg-purple-500 text-white py-2 rounded-lg text-sm">
+                                            Subscribe ($4.99/month)
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Settings Modal */}
+                    {showSettingsModal && (
+                        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-20">
+                            <div className="bg-white rounded-xl p-6 w-full max-w-sm max-h-[90vh] overflow-y-auto">
+                                <div className="flex justify-between items-center mb-6">
+                                    <h3 className="title-font text-xl font-bold">Settings</h3>
+                                    <button
+                                        className="text-gray-500"
+                                        onClick={() => setShowSettingsModal(false)}
+                                    >
+                                        <i className="fas fa-times"></i>
                                     </button>
                                 </div>
-                            </div>
-                        </div>
-                    )}
 
-                    {/* Video Modal */}
-                    {showVideoModal && currentVideo && (
-                        <div className="fixed inset-0 bg-black z-50">
-                            {/* Video Player (Fullscreen) */}
-                            <div className="absolute inset-0 flex items-center justify-center">
-                                <iframe
-                                    src={`https://www.youtube.com/embed/${currentVideo.videoId}?autoplay=1`}
-                                    className="w-full h-full"
-                                    frameBorder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowFullScreen
-                                ></iframe>
-                            </div>
+                                <div className="mb-6">
+                                    <h4 className="font-bold mb-3">Parental Controls</h4>
+                                    <div className="space-y-4">
+                                        <div className="flex justify-between items-center">
+                                            <div>
+                                                <h5 className="font-medium">Screen Time Limit</h5>
+                                                <p className="text-xs text-gray-600">{screenTimeLimit} minutes per day</p>
+                                            </div>
+                                            <div className="flex items-center space-x-2">
+                                                <button
+                                                    className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center"
+                                                    onClick={() => setScreenTimeLimit(Math.max(15, screenTimeLimit - 15))}
+                                                >
+                                                    <i className="fas fa-minus"></i>
+                                                </button>
+                                                <span className="w-8 text-center">{screenTimeLimit}</span>
+                                                <button
+                                                    className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center"
+                                                    onClick={() => setScreenTimeLimit(Math.min(180, screenTimeLimit + 15))}
+                                                >
+                                                    <i className="fas fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
 
-                            {/* Close Button */}
-                            <button
-                                className="absolute top-4 right-4 bg-black bg-opacity-50 text-white w-10 h-10 rounded-full flex items-center justify-center z-10"
-                                onClick={closeVideo}
-                            >
-                                <i className="fas fa-times text-xl"></i>
-                            </button>
+                                        <div className="flex justify-between items-center">
+                                            <div>
+                                                <h5 className="font-medium">Bedtime Mode</h5>
+                                                <p className="text-xs text-gray-600">{bedtimeMode ? 'Enabled - dims screen after 8PM' : 'Disabled'}</p>
+                                            </div>
+                                            <button
+                                                className={`w-12 h-6 rounded-full flex items-center ${bedtimeMode ? 'bg-orange-500 justify-end' : 'bg-gray-200 justify-start'} p-1`}
+                                                onClick={toggleBedtimeMode}
+                                            >
+                                                <div className="w-4 h-4 bg-white rounded-full"></div>
+                                            </button>
+                                        </div>
 
-                            {/* Video Info Overlay (Bottom) */}
-                            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4 pt-10 text-white">
-                                <div className="flex items-start">
-                                    <div className="flex-1">
-                                        <h2 className="text-xl font-bold mb-1">{currentVideo.title}</h2>
-                                        <div className="flex items-center space-x-3 mb-2">
-                                            <span className="bg-pink-500 text-white px-2 py-1 rounded-full text-xs">
-                                                {currentVideo.culture}
-                                            </span>
-                                            <span className="text-gray-300 text-sm">
-                                                <i className="fas fa-eye mr-1"></i>
-                                                {currentVideo.views} views
-                                            </span>
+                                        <div className="flex justify-between items-center">
+                                            <div>
+                                                <h5 className="font-medium">Content Languages</h5>
+                                                <p className="text-xs text-gray-600">Filter stories by language</p>
+                                            </div>
+                                            <select
+                                                className="border rounded-lg px-2 py-1 text-sm"
+                                                value={activeLanguage}
+                                                onChange={(e) => setActiveLanguage(e.target.value)}
+                                            >
+                                                <option value="all">All Languages</option>
+                                                <option value="english">English</option>
+                                                <option value="spanish">Spanish</option>
+                                                <option value="hindi">Hindi</option>
+                                                <option value="mandarin">Mandarin</option>
+                                            </select>
                                         </div>
                                     </div>
-                                    <div className="flex space-x-3 ml-2">
-                                        <button className="flex flex-col items-center">
-                                            <i className="fas fa-heart text-xl mb-1"></i>
-                                            <span className="text-xs">Like</span>
+                                </div>
+
+                                <div className="mb-6">
+                                    <h4 className="font-bold mb-3">Account</h4>
+                                    <div className="space-y-2">
+                                        <button className="w-full text-left p-2 rounded-lg hover:bg-gray-50">
+                                            Edit Profile
                                         </button>
-                                        <button className="flex flex-col items-center">
-                                            <i className="fas fa-share text-xl mb-1"></i>
-                                            <span className="text-xs">Share</span>
+                                        <button className="w-full text-left p-2 rounded-lg hover:bg-gray-50">
+                                            Notification Settings
+                                        </button>
+                                        <button className="w-full text-left p-2 rounded-lg hover:bg-gray-50">
+                                            Privacy Settings
                                         </button>
                                     </div>
                                 </div>
 
-                                {/* Description (collapsed by default, can be expanded) */}
-                                <div className="mt-2 text-sm text-gray-300">
-                                    <p className="line-clamp-2">
-                                        Learn about {currentVideo.culture.toLowerCase()} culture through this short video. {currentVideo.title.includes('Drum') ? 'Discover traditional rhythms and their meanings.' : currentVideo.title.includes('Calligraphy') ? 'See how beautiful characters are created with brush strokes.' : currentVideo.title.includes('Dance') ? 'Watch traditional dance movements and their significance.' : 'Learn to make authentic dishes with cultural significance.'}
-                                    </p>
+                                <div>
+                                    <h4 className="font-bold mb-3">Support</h4>
+                                    <div className="space-y-2">
+                                        <button className="w-full text-left p-2 rounded-lg hover:bg-gray-50">
+                                            Help Center
+                                        </button>
+                                        <button className="w-full text-left p-2 rounded-lg hover:bg-gray-50">
+                                            Contact Us
+                                        </button>
+                                        <button className="w-full text-left p-2 rounded-lg hover:bg-gray-50 text-red-500">
+                                            Log Out
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     )}
+
+                    {/* Audio Element (hidden) */}
+                    <audio
+                        src={currentStory?.audio}
+                        onTimeUpdate={handleTimeUpdate}
+                        onEnded={() => setIsPlaying(false)}
+                        style={{ display: 'none' }}
+                    />
                 </div>
             );
         }
