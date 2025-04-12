@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CuddleTales: Where Heritage Becomes a Bedtime Story</title>
+    <title>CuddleTales: Where Grandparents' Stories Come to Life</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -88,6 +88,30 @@
                 transform: translateY(0px);
             }
         }
+
+        .story-feed-card {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .scrollable-feed {
+            scroll-snap-type: y mandatory;
+            height: 500px;
+            overflow-y: scroll;
+        }
+
+        .scroll-item {
+            scroll-snap-align: start;
+            height: 100%;
+        }
+
+        .theme-badge {
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
     </style>
 </head>
 
@@ -102,8 +126,9 @@
             </div>
             <div class="hidden md:flex space-x-8">
                 <a href="#features" class="text-gray-700 hover:text-pink-500 transition">Features</a>
-                <a href="#stories" class="text-gray-700 hover:text-pink-500 transition">Stories</a>
-                <a href="#community" class="text-gray-700 hover:text-pink-500 transition">Community</a>
+                <a href="#storyfeed" class="text-gray-700 hover:text-pink-500 transition">Story Feed</a>
+                <a href="#categories" class="text-gray-700 hover:text-pink-500 transition">Categories</a>
+                <a href="#elders" class="text-gray-700 hover:text-pink-500 transition">For Elders</a>
                 <a href="#rewards" class="text-gray-700 hover:text-pink-500 transition">Rewards</a>
             </div>
             <button class="md:hidden text-gray-700">
@@ -123,11 +148,11 @@
         <div class="container mx-auto px-6 flex flex-col md:flex-row items-center">
             <div class="md:w-1/2 mb-10 md:mb-0">
                 <h1 class="title-font text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 leading-tight mb-6">
-                    Where Heritage Becomes <span class="text-pink-600">a Bedtime Story</span>
+                    Where Grandparents' Stories <span class="text-pink-600">Come to Life</span>
                 </h1>
                 <p class="text-lg text-gray-700 mb-8">
-                    Coming soon: Preserve your family's traditions, values, and heritage through engaging, fun, and
-                    meaningful storytelling experiences.
+                    Transforming real-life experiences, moral lessons, and cultural tales from elders into beautifully
+                    animated or audio stories that children and families can enjoy, learn from, and treasure forever.
                 </p>
                 <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
                     <a href="https://docs.google.com/forms/d/e/1FAIpQLSeds2PYKUbB4TFDcYkxG80oFCcmahOu-1ye1rvqL6UtyoRehw/viewform"
@@ -142,16 +167,16 @@
             </div>
             <div class="md:w-1/2 relative">
                 <div class="relative floating">
-                    <img src="https://images.unsplash.com/photo-1579208575657-c595a05383b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
-                        alt="Family reading together" class="rounded-2xl shadow-2xl w-full max-w-md mx-auto">
+                    <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+                        alt="Grandparent reading to child" class="rounded-2xl shadow-2xl w-full max-w-md mx-auto">
                     <div class="absolute -bottom-5 -right-5 bg-white p-4 rounded-xl shadow-lg">
                         <div class="flex items-center">
                             <div class="bg-yellow-400 p-3 rounded-full mr-3">
                                 <i class="fas fa-star text-white"></i>
                             </div>
                             <div>
-                                <p class="font-bold">"This will help my kids connect with our culture!"</p>
-                                <p class="text-sm text-gray-600">- Expected parent feedback</p>
+                                <p class="font-bold">"Finally a way to share my stories with my grandkids!"</p>
+                                <p class="text-sm text-gray-600">- Expected grandparent feedback</p>
                             </div>
                         </div>
                     </div>
@@ -165,11 +190,12 @@
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
                 <h2 class="title-font text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-                    Parent-Led, <span class="text-pink-500">Culture-Powered</span>
+                    Preserving Wisdom, <span class="text-pink-500">One Story at a Time</span>
                 </h2>
                 <p class="max-w-2xl mx-auto text-gray-600">
-                    Parents are the guardians of culture. CuddleTales will give them the tools to preserve and pass down
-                    traditions.
+                    We capture the timeless stories from grandparents and elders across the world and transform them
+                    into
+                    engaging animations or immersive audio tales.
                 </p>
             </div>
 
@@ -177,172 +203,173 @@
                 <!-- Feature 1 -->
                 <div class="culture-card bg-white p-8 rounded-xl border border-gray-100">
                     <div class="bg-pink-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-book text-pink-600 text-2xl"></i>
+                        <i class="fas fa-video text-pink-600 text-2xl"></i>
                     </div>
-                    <h3 class="title-font text-xl font-bold text-gray-800 mb-3">Curate Cultural Content</h3>
+                    <h3 class="title-font text-xl font-bold text-gray-800 mb-3">Animated Stories</h3>
                     <p class="text-gray-600">
-                        Select stories from your homeland, dialect, or family traditions that reflect your unique
-                        heritage.
+                        Watch short, heartfelt stories in a scrollable format with beautiful animations that bring tales
+                        to life.
                     </p>
                 </div>
 
                 <!-- Feature 2 -->
                 <div class="culture-card bg-white p-8 rounded-xl border border-gray-100">
-                    <div class="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-user-edit text-yellow-600 text-2xl"></i>
+                    <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-headphones text-blue-600 text-2xl"></i>
                     </div>
-                    <h3 class="title-font text-xl font-bold text-gray-800 mb-3">Personalize Family Stories</h3>
+                    <h3 class="title-font text-xl font-bold text-gray-800 mb-3">Audio Tales</h3>
                     <p class="text-gray-600">
-                        Upload or customize family stories, recipes, or proverbs to share with your children.
+                        Perfect for bedtime listening - immersive audio stories that spark imagination and connection.
                     </p>
                 </div>
 
                 <!-- Feature 3 -->
                 <div class="culture-card bg-white p-8 rounded-xl border border-gray-100">
                     <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-language text-purple-600 text-2xl"></i>
+                        <i class="fas fa-shield-alt text-purple-600 text-2xl"></i>
                     </div>
-                    <h3 class="title-font text-xl font-bold text-gray-800 mb-3">Multilingual Experience</h3>
+                    <h3 class="title-font text-xl font-bold text-gray-800 mb-3">Child-Safe Platform</h3>
                     <p class="text-gray-600">
-                        Stories told in both native languages and English to preserve language while making it
-                        accessible.
+                        A safe digital space with content curation and learning built into every experience.
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Stories Section -->
-    <section id="stories" class="py-20 bg-gray-50">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="title-font text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-                    Cultural Stories <span class="text-pink-500">That Come Alive</span>
-                </h2>
-                <p class="max-w-2xl mx-auto text-gray-600">
-                    Every story will be carefully crafted or adapted to reflect real traditions with visual animations
-                    and moral lessons.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Story 1 -->
-                <div class="story-card"
-                    style="background-image: url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')">
-                    <div class="story-overlay">
-                        <h3 class="title-font font-bold text-xl">Anansi the Spider</h3>
-                        <p class="text-sm">West African Folktale</p>
-                        <div class="flex mt-2">
-                            <span class="bg-yellow-400 text-xs px-2 py-1 rounded mr-2">Ages 4-8</span>
-                            <span class="bg-blue-400 text-white text-xs px-2 py-1 rounded">Yoruba/English</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Story 2 -->
-                <div class="story-card"
-                    style="background-image: url('https://images.unsplash.com/photo-1547592180-85f173990554?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')">
-                    <div class="story-overlay">
-                        <h3 class="title-font font-bold text-xl">The Dragon's Pearl</h3>
-                        <p class="text-sm">Chinese Legend</p>
-                        <div class="flex mt-2">
-                            <span class="bg-yellow-400 text-xs px-2 py-1 rounded mr-2">Ages 6-10</span>
-                            <span class="bg-blue-400 text-white text-xs px-2 py-1 rounded">Mandarin/English</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Story 3 -->
-                <div class="story-card"
-                    style="background-image: url('https://images.unsplash.com/photo-1518655048521-f130df041f66?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')">
-                    <div class="story-overlay">
-                        <h3 class="title-font font-bold text-xl">The Hungry Caterpillar</h3>
-                        <p class="text-sm">Navajo Adaptation</p>
-                        <div class="flex mt-2">
-                            <span class="bg-yellow-400 text-xs px-2 py-1 rounded mr-2">Ages 3-6</span>
-                            <span class="bg-blue-400 text-white text-xs px-2 py-1 rounded">Diné/English</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-center mt-12">
-                <a href="./demo.html"
-                    class="bg-white hover:bg-gray-100 text-gray-800 px-8 py-3 rounded-full font-medium transition shadow-lg border border-gray-200 flex items-center mx-auto">
-                    <i class="fas fa-book-open mr-2"></i> See Story Preview
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Age Appropriate Section -->
-    <section class="py-20 bg-white">
+    <!-- Story Feed Section -->
+    <section id="storyfeed" class="py-20 bg-gray-50">
         <div class="container mx-auto px-6">
             <div class="flex flex-col md:flex-row items-center">
                 <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
                     <h2 class="title-font text-3xl md:text-4xl font-bold text-gray-800 mb-6">
-                        Age-Appropriate, <span class="text-pink-500">Culture-Smart</span>
+                        A Story Feed <span class="text-pink-500">Like No Other</span>
                     </h2>
                     <p class="text-gray-600 mb-6">
-                        Stories, games, and activities will be personalized to each child's age and language fluency
-                        level.
+                        Our TikTok-style scrollable format makes discovering and enjoying stories intuitive and engaging
+                        for all ages. Choose between video and audio-only formats to suit any situation.
                     </p>
 
                     <div class="space-y-4">
                         <div class="flex items-start">
                             <div class="bg-pink-100 p-2 rounded-full mr-4">
-                                <i class="fas fa-baby text-pink-600"></i>
+                                <i class="fas fa-mobile-alt text-pink-600"></i>
                             </div>
                             <div>
-                                <h4 class="font-bold text-gray-800">Younger Children (2-5)</h4>
-                                <p class="text-gray-600 text-sm">Simpler, more visual content with songs, rhymes, and
-                                    animated tales</p>
+                                <h4 class="font-bold text-gray-800">Vertical Video Format</h4>
+                                <p class="text-gray-600 text-sm">Easy-to-use interface that kids and grandparents alike
+                                    will love</p>
                             </div>
                         </div>
 
                         <div class="flex items-start">
                             <div class="bg-blue-100 p-2 rounded-full mr-4">
-                                <i class="fas fa-child text-blue-600"></i>
+                                <i class="fas fa-moon text-blue-600"></i>
                             </div>
                             <div>
-                                <h4 class="font-bold text-gray-800">School Age (6-10)</h4>
-                                <p class="text-gray-600 text-sm">Deeper insights with origin stories, interactive
-                                    timelines, and cultural trivia</p>
+                                <h4 class="font-bold text-gray-800">Bedtime Mode</h4>
+                                <p class="text-gray-600 text-sm">Switch to audio-only with calming visuals for perfect
+                                    bedtime stories</p>
                             </div>
                         </div>
 
                         <div class="flex items-start">
                             <div class="bg-purple-100 p-2 rounded-full mr-4">
-                                <i class="fas fa-user text-purple-600"></i>
+                                <i class="fas fa-bookmark text-purple-600"></i>
                             </div>
                             <div>
-                                <h4 class="font-bold text-gray-800">Pre-Teens (11-13)</h4>
-                                <p class="text-gray-600 text-sm">More complex narratives, historical context, and
-                                    cultural discussions</p>
+                                <h4 class="font-bold text-gray-800">Save Favorites</h4>
+                                <p class="text-gray-600 text-sm">Bookmark stories to enjoy again and again</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="md:w-1/2">
-                    <div class="bg-gray-50 p-8 rounded-xl border border-gray-200 relative">
-                        <div class="absolute -top-5 -left-5 bg-pink-500 text-white p-3 rounded-full shadow-lg">
-                            <i class="fas fa-heart text-xl"></i>
-                        </div>
-                        <img src="https://images.unsplash.com/photo-1577897113292-3b95936e5206?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
-                            alt="Child reading" class="rounded-lg mb-6 w-full">
-                        <h3 class="title-font text-xl font-bold text-gray-800 mb-3">Personalized Learning Path</h3>
-                        <p class="text-gray-600 mb-4">
-                            Our algorithm will adjust content based on your child's age, interests, and language skills
-                            to create the perfect cultural journey.
-                        </p>
-                        <div class="bg-yellow-50 border border-yellow-100 rounded-lg p-4">
+                    <div
+                        class="story-feed-card bg-white p-1 rounded-xl shadow-xl border border-gray-200 max-w-md mx-auto">
+                        <div class="flex justify-between items-center p-3 border-b border-gray-200">
                             <div class="flex items-center">
-                                <i class="fas fa-lightbulb text-yellow-500 mr-3 text-xl"></i>
-                                <p class="text-sm text-yellow-800 font-medium">
-                                    "Projected to help retain 30% more heritage language words than traditional methods"
-                                    - Cultural Education Study
-                                </p>
+                                <div
+                                    class="w-8 h-8 rounded-full bg-pink-500 flex items-center justify-center text-white">
+                                    <i class="fas fa-book"></i>
+                                </div>
+                                <span class="ml-2 font-medium">CuddleTales</span>
+                            </div>
+                            <i class="fas fa-ellipsis-h text-gray-500"></i>
+                        </div>
+
+                        <div class="scrollable-feed">
+                            <!-- Story 1 -->
+                            <div class="scroll-item relative" style="background-color: #fce4ec;">
+                                <div class="absolute top-4 left-4">
+                                    <span class="theme-badge bg-pink-500 text-white">Life Lesson</span>
+                                </div>
+                                <div class="h-full flex flex-col justify-center items-center p-6 text-center">
+                                    <i class="fas fa-quote-left text-4xl text-pink-500 mb-4 opacity-50"></i>
+                                    <p class="text-lg font-medium mb-6">"The day I learned that honesty brings peace to
+                                        the heart"</p>
+                                    <div class="flex items-center">
+                                        <div class="w-10 h-10 rounded-full bg-gray-300 mr-3"></div>
+                                        <div>
+                                            <p class="text-sm font-medium">Grandma Rosa</p>
+                                            <p class="text-xs text-gray-500">Mexico</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-4 right-4 flex space-x-3">
+                                    <i class="fas fa-heart text-pink-500"></i>
+                                    <i class="fas fa-bookmark text-gray-400"></i>
+                                    <i class="fas fa-share-alt text-gray-400"></i>
+                                </div>
+                            </div>
+
+                            <!-- Story 2 -->
+                            <div class="scroll-item relative" style="background-color: #e3f2fd;">
+                                <div class="absolute top-4 left-4">
+                                    <span class="theme-badge bg-blue-500 text-white">Cultural Tale</span>
+                                </div>
+                                <div class="h-full flex flex-col justify-center items-center p-6 text-center">
+                                    <i class="fas fa-quote-left text-4xl text-blue-500 mb-4 opacity-50"></i>
+                                    <p class="text-lg font-medium mb-6">"How our village celebrated the harvest moon
+                                        festival"</p>
+                                    <div class="flex items-center">
+                                        <div class="w-10 h-10 rounded-full bg-gray-300 mr-3"></div>
+                                        <div>
+                                            <p class="text-sm font-medium">Grandpa Li</p>
+                                            <p class="text-xs text-gray-500">China</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-4 right-4 flex space-x-3">
+                                    <i class="fas fa-heart text-blue-500"></i>
+                                    <i class="fas fa-bookmark text-gray-400"></i>
+                                    <i class="fas fa-share-alt text-gray-400"></i>
+                                </div>
+                            </div>
+
+                            <!-- Story 3 -->
+                            <div class="scroll-item relative" style="background-color: #fff8e1;">
+                                <div class="absolute top-4 left-4">
+                                    <span class="theme-badge bg-yellow-600 text-white">Funny Moment</span>
+                                </div>
+                                <div class="h-full flex flex-col justify-center items-center p-6 text-center">
+                                    <i class="fas fa-quote-left text-4xl text-yellow-600 mb-4 opacity-50"></i>
+                                    <p class="text-lg font-medium mb-6">"The time I accidentally dyed all my clothes
+                                        pink!"</p>
+                                    <div class="flex items-center">
+                                        <div class="w-10 h-10 rounded-full bg-gray-300 mr-3"></div>
+                                        <div>
+                                            <p class="text-sm font-medium">Nana Betty</p>
+                                            <p class="text-xs text-gray-500">USA</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-4 right-4 flex space-x-3">
+                                    <i class="fas fa-heart text-yellow-600"></i>
+                                    <i class="fas fa-bookmark text-gray-400"></i>
+                                    <i class="fas fa-share-alt text-gray-400"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -351,64 +378,431 @@
         </div>
     </section>
 
-    <!-- Community Section -->
-    <section id="community" class="py-20 bg-gray-50">
+    <!-- Categories Section -->
+    <section id="categories" class="py-20 bg-white">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
                 <h2 class="title-font text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-                    Culture <span class="text-pink-500">Circles</span>
+                    Curated Categories <span class="text-pink-500">for Every Mood</span>
                 </h2>
                 <p class="max-w-2xl mx-auto text-gray-600">
-                    Children will connect with peers from similar cultural backgrounds in safe, moderated spaces.
+                    Discover stories across themes that educate, entertain, and connect generations.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Category 1 -->
+                <div
+                    class="culture-card bg-gradient-to-br from-pink-50 to-pink-100 p-8 rounded-xl border border-pink-200 text-center">
+                    <div class="bg-pink-200 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-landmark text-pink-600 text-3xl"></i>
+                    </div>
+                    <h3 class="title-font text-xl font-bold text-gray-800 mb-3">Cultural Heritage</h3>
+                    <p class="text-gray-600 mb-4">
+                        Traditional tales, festivals, and customs from around the world.
+                    </p>
+                    <div class="flex justify-center">
+                        <span class="bg-pink-200 text-pink-800 text-xs px-3 py-1 rounded-full">Coming Soon</span>
+                    </div>
+                </div>
+
+                <!-- Category 2 -->
+                <div
+                    class="culture-card bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-xl border border-blue-200 text-center">
+                    <div class="bg-blue-200 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-heart text-blue-600 text-3xl"></i>
+                    </div>
+                    <h3 class="title-font text-xl font-bold text-gray-800 mb-3">Life Lessons</h3>
+                    <p class="text-gray-600 mb-4">
+                        Moral stories and wisdom gained from real-life experiences.
+                    </p>
+                    <div class="flex justify-center">
+                        <span class="bg-blue-200 text-blue-800 text-xs px-3 py-1 rounded-full">Coming Soon</span>
+                    </div>
+                </div>
+
+                <!-- Category 3 -->
+                <div
+                    class="culture-card bg-gradient-to-br from-yellow-50 to-yellow-100 p-8 rounded-xl border border-yellow-200 text-center">
+                    <div class="bg-yellow-200 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-moon text-yellow-600 text-3xl"></i>
+                    </div>
+                    <h3 class="title-font text-xl font-bold text-gray-800 mb-3">Bedtime Tales</h3>
+                    <p class="text-gray-600 mb-4">
+                        Soothing stories perfect for winding down before sleep.
+                    </p>
+                    <div class="flex justify-center">
+                        <span class="bg-yellow-200 text-yellow-800 text-xs px-3 py-1 rounded-full">Coming Soon</span>
+                    </div>
+                </div>
+
+                <!-- Category 4 -->
+                <div
+                    class="culture-card bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-xl border border-green-200 text-center">
+                    <div class="bg-green-200 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-laugh-beam text-green-600 text-3xl"></i>
+                    </div>
+                    <h3 class="title-font text-xl font-bold text-gray-800 mb-3">Funny Moments</h3>
+                    <p class="text-gray-600 mb-4">
+                        Hilarious real-life stories that will make the whole family laugh.
+                    </p>
+                    <div class="flex justify-center">
+                        <span class="bg-green-200 text-green-800 text-xs px-3 py-1 rounded-full">Coming Soon</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Parental Controls Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 relative max-w-md mx-auto">
+                        <div class="absolute -top-5 -left-5 bg-pink-500 text-white p-3 rounded-full shadow-lg">
+                            <i class="fas fa-user-shield text-xl"></i>
+                        </div>
+                        <h3 class="title-font text-2xl font-bold text-gray-800 mb-6">Smart Parental Controls</h3>
+
+                        <div class="space-y-4">
+                            <!-- Control 1 -->
+                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                <div class="flex items-center">
+                                    <i class="fas fa-filter text-pink-500 mr-3"></i>
+                                    <span>Content Filtering</span>
+                                </div>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" value="" class="sr-only peer" checked>
+                                    <div
+                                        class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-pink-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-pink-500">
+                                    </div>
+                                </label>
+                            </div>
+
+                            <!-- Control 2 -->
+                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                <div class="flex items-center">
+                                    <i class="fas fa-sun text-yellow-500 mr-3"></i>
+                                    <span>Daily Theme Selection</span>
+                                </div>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" value="" class="sr-only peer" checked>
+                                    <div
+                                        class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-pink-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-pink-500">
+                                    </div>
+                                </label>
+                            </div>
+
+                            <!-- Control 3 -->
+                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                <div class="flex items-center">
+                                    <i class="fas fa-clock text-blue-500 mr-3"></i>
+                                    <span>Screen Time Limits</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="text-sm text-gray-500 mr-2">1 hour</span>
+                                    <i class="fas fa-chevron-down text-gray-400"></i>
+                                </div>
+                            </div>
+
+                            <!-- Control 4 -->
+                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                <div class="flex items-center">
+                                    <i class="fas fa-moon text-purple-500 mr-3"></i>
+                                    <span>Bedtime Mode</span>
+                                </div>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" value="" class="sr-only peer">
+                                    <div
+                                        class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-pink-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-pink-500">
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 bg-pink-50 border border-pink-100 rounded-lg p-4">
+                            <div class="flex items-start">
+                                <i class="fas fa-info-circle text-pink-500 mt-1 mr-2"></i>
+                                <p class="text-sm text-pink-800">Parents can customize what types of stories their
+                                    children see and select daily themes for varied learning.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="md:w-1/2 md:pl-10">
+                    <h2 class="title-font text-3xl md:text-4xl font-bold text-gray-800 mb-6">
+                        Peace of Mind <span class="text-pink-500">Built In</span>
+                    </h2>
+                    <p class="text-gray-600 mb-6">
+                        Our comprehensive parental controls ensure children enjoy stories in a safe, curated environment
+                        while giving parents the tools to guide their experience.
+                    </p>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="bg-pink-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-sliders-h text-pink-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 mb-2">Customizable Content Filters</h4>
+                                <p class="text-gray-600">Select which categories and themes are appropriate for your
+                                    child's age and interests.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-calendar-alt text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 mb-2">Daily Theme Selection</h4>
+                                <p class="text-gray-600">Choose whether today will feature cultural stories, moral
+                                    lessons, or funny tales.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="bg-purple-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-stopwatch text-purple-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 mb-2">Built-in Screen Time Management</h4>
+                                <p class="text-gray-600">Set healthy limits with automatic shut-off when time is up.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Virtual Connect Rooms -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="title-font text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+                    Virtual <span class="text-pink-500">Connect Rooms</span>
+                </h2>
+                <p class="max-w-2xl mx-auto text-gray-600">
+                    Themed story rooms where families and users can join to share and bond over shared experiences in
+                    safe,
+                    moderated spaces.
                 </p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Community 1 -->
-                <div class="culture-card bg-white p-8 rounded-xl border border-gray-100 text-center">
-                    <div class="bg-pink-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-users text-pink-600 text-3xl"></i>
+                <!-- Room 1 -->
+                <div class="culture-card bg-white p-6 rounded-xl border border-gray-100">
+                    <div class="relative h-48 rounded-lg overflow-hidden mb-4">
+                        <img src="https://images.unsplash.com/photo-1511988617509-a57c8a288659?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+                            alt="Storytelling circle" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="bg-pink-500 text-white text-xs px-3 py-1 rounded-full">Live Now</span>
+                        </div>
+                        <div class="absolute top-4 right-4 flex">
+                            <div class="w-8 h-8 rounded-full border-2 border-white bg-blue-500 -mr-2"></div>
+                            <div class="w-8 h-8 rounded-full border-2 border-white bg-green-500 -mr-2"></div>
+                            <div class="w-8 h-8 rounded-full border-2 border-white bg-yellow-500"></div>
+                        </div>
                     </div>
-                    <h3 class="title-font text-xl font-bold text-gray-800 mb-3">Story Circles</h3>
-                    <p class="text-gray-600 mb-4">
-                        Join themed reading groups where kids explore cultural stories together with a moderator.
-                    </p>
-                    <div class="flex justify-center space-x-2">
-                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Yoruba</span>
-                        <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Hindi</span>
-                        <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Arabic</span>
-                    </div>
-                </div>
-
-                <!-- Community 2 -->
-                <div class="culture-card bg-white p-8 rounded-xl border border-gray-100 text-center">
-                    <div class="bg-yellow-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-utensils text-yellow-600 text-3xl"></i>
-                    </div>
-                    <h3 class="title-font text-xl font-bold text-gray-800 mb-3">Cooking Clubs</h3>
-                    <p class="text-gray-600 mb-4">
-                        Learn to make traditional dishes with other families, sharing recipes and cultural significance.
-                    </p>
-                    <div class="flex justify-center space-x-2">
-                        <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded">Italian</span>
-                        <span class="bg-indigo-100 text-indigo-800 text-xs px-2 py-1 rounded">Korean</span>
-                        <span class="bg-teal-100 text-teal-800 text-xs px-2 py-1 rounded">Mexican</span>
+                    <h3 class="title-font text-xl font-bold text-gray-800 mb-2">African Folktales Circle</h3>
+                    <p class="text-gray-600 text-sm mb-4">Join Grandma Ama as she shares traditional Anansi stories</p>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center">
+                            <i class="fas fa-users text-gray-400 mr-2"></i>
+                            <span class="text-sm text-gray-500">24 joined</span>
+                        </div>
+                        <button class="bg-pink-500 hover:bg-pink-600 text-white px-4 py-1 rounded-full text-sm">
+                            Join
+                        </button>
                     </div>
                 </div>
 
-                <!-- Community 3 -->
-                <div class="culture-card bg-white p-8 rounded-xl border border-gray-100 text-center">
-                    <div class="bg-purple-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <i class="fas fa-calendar-alt text-purple-600 text-3xl"></i>
+                <!-- Room 2 -->
+                <div class="culture-card bg-white p-6 rounded-xl border border-gray-100">
+                    <div class="relative h-48 rounded-lg overflow-hidden mb-4">
+                        <img src="https://images.unsplash.com/photo-1541178735493-479c1a27ed24?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+                            alt="Cooking together" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="bg-blue-500 text-white text-xs px-3 py-1 rounded-full">Starts Soon</span>
+                        </div>
                     </div>
-                    <h3 class="title-font text-xl font-bold text-gray-800 mb-3">Festive Events</h3>
-                    <p class="text-gray-600 mb-4">
-                        Celebrate holidays and traditions together in virtual event rooms with cultural activities.
+                    <h3 class="title-font text-xl font-bold text-gray-800 mb-2">Family Recipe Exchange</h3>
+                    <p class="text-gray-600 text-sm mb-4">Share and learn heirloom recipes from around the world</p>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center">
+                            <i class="fas fa-clock text-gray-400 mr-2"></i>
+                            <span class="text-sm text-gray-500">Tomorrow 4PM</span>
+                        </div>
+                        <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1 rounded-full text-sm">
+                            Remind Me
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Room 3 -->
+                <div class="culture-card bg-white p-6 rounded-xl border border-gray-100">
+                    <div class="relative h-48 rounded-lg overflow-hidden mb-4">
+                        <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+                            alt="Migration stories" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="bg-purple-500 text-white text-xs px-3 py-1 rounded-full">Weekly</span>
+                        </div>
+                    </div>
+                    <h3 class="title-font text-xl font-bold text-gray-800 mb-2">Journey Stories</h3>
+                    <p class="text-gray-600 text-sm mb-4">Elders share their migration and survival experiences</p>
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center">
+                            <i class="fas fa-calendar text-gray-400 mr-2"></i>
+                            <span class="text-sm text-gray-500">Every Thursday</span>
+                        </div>
+                        <button class="bg-purple-500 hover:bg-purple-600 text-white px-4 py-1 rounded-full text-sm">
+                            Subscribe
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="#"
+                    class="bg-white hover:bg-gray-100 text-gray-800 px-8 py-3 rounded-full font-medium transition shadow-lg border border-gray-200 inline-flex items-center">
+                    <i class="fas fa-door-open mr-2"></i> Explore All Connect Rooms
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- For Elders Section -->
+    <section id="elders" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
+                    <h2 class="title-font text-3xl md:text-4xl font-bold text-gray-800 mb-6">
+                        Empowering <span class="text-pink-500">Elders</span>
+                    </h2>
+                    <p class="text-gray-600 mb-6">
+                        We provide tools and opportunities for grandparents and elders to share their wisdom while being
+                        compensated for their contributions.
                     </p>
-                    <div class="flex justify-center space-x-2">
-                        <span class="bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded">Lunar New Year</span>
-                        <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Diwali</span>
-                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Kwanzaa</span>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="bg-pink-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-money-bill-wave text-pink-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 mb-2">Revenue Sharing</h4>
+                                <p class="text-gray-600">Elders receive a share from platform subscriptions based on
+                                    their story's popularity.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-book text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 mb-2">Legacy Preservation</h4>
+                                <p class="text-gray-600">Every story submission helps preserve your legacy for future
+                                    generations.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="bg-purple-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-users text-purple-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 mb-2">Cultural Impact</h4>
+                                <p class="text-gray-600">Make a meaningful difference by sharing your cultural knowledge
+                                    and experiences.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="bg-green-100 p-3 rounded-full mr-4">
+                                <i class="fas fa-hand-holding-heart text-green-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 mb-2">Easy Submission</h4>
+                                <p class="text-gray-600">Simple tools to record or write your stories with our
+                                    assistance.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="#"
+                        class="mt-8 bg-pink-500 hover:bg-pink-600 text-white px-6 py-3 rounded-full font-medium transition shadow-md inline-flex items-center">
+                        <i class="fas fa-microphone mr-2"></i> Learn How to Share Your Stories
+                    </a>
+                </div>
+
+                <div class="md:w-1/2">
+                    <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 relative">
+                        <div class="absolute -top-5 -right-5 bg-yellow-400 text-white p-3 rounded-full shadow-lg">
+                            <i class="fas fa-star text-xl"></i>
+                        </div>
+                        <div class="flex items-center mb-6">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+                                alt="Elderly woman" class="w-16 h-16 rounded-full object-cover mr-4">
+                            <div>
+                                <h4 class="font-bold text-gray-800">Grandma Maria</h4>
+                                <p class="text-sm text-gray-600">Top Storyteller | 42 stories shared</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-pink-50 border border-pink-100 rounded-lg p-4 mb-6">
+                            <p class="text-pink-800 italic mb-3">"CuddleTales has given me a way to connect with my
+                                grandkids despite the distance. They love hearing my stories, and I love that they're
+                                learning about our culture."</p>
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <i class="fas fa-heart text-pink-500 mr-1"></i>
+                                    <span class="text-sm text-pink-800">124 likes</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-comment text-pink-500 mr-1"></i>
+                                    <span class="text-sm text-pink-800">23 comments</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <div class="bg-blue-50 p-4 rounded-lg text-center">
+                                <p class="text-2xl font-bold text-blue-600 mb-1">$247</p>
+                                <p class="text-xs text-blue-800">EARNED LAST MONTH</p>
+                            </div>
+                            <div class="bg-green-50 p-4 rounded-lg text-center">
+                                <p class="text-2xl font-bold text-green-600 mb-1">1,842</p>
+                                <p class="text-xs text-green-800">STORY VIEWS</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                            <h5 class="font-bold text-gray-800 mb-2">Top Performing Stories</h5>
+                            <div class="space-y-2">
+                                <div class="flex justify-between items-center">
+                                    <p class="text-sm">"How I crossed the border"</p>
+                                    <span class="text-xs bg-pink-100 text-pink-800 px-2 py-1 rounded-full">3,421
+                                        views</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <p class="text-sm">"My first job in America"</p>
+                                    <span class="text-xs bg-pink-100 text-pink-800 px-2 py-1 rounded-full">2,876
+                                        views</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <p class="text-sm">"The day I met your grandfather"</p>
+                                    <span class="text-xs bg-pink-100 text-pink-800 px-2 py-1 rounded-full">2,543
+                                        views</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -416,261 +810,164 @@
     </section>
 
     <!-- Rewards Section -->
-    <section id="rewards" class="py-20 bg-pink-50">
+    <section id="rewards" class="py-20 bg-white">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
                 <h2 class="title-font text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-                    Earn While You Learn: <span class="text-pink-500">CuddlePoints</span>
+                    Gamified <span class="text-pink-500">Rewards</span>
                 </h2>
                 <p class="max-w-2xl mx-auto text-gray-600">
-                    Kids will stay motivated through our culturally themed reward system that celebrates their heritage
-                    journey.
+                    Our reward system motivates engagement while celebrating cultural learning and family connections.
                 </p>
             </div>
 
-            <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
-                    <div class="bg-white p-8 rounded-xl shadow-md border border-gray-100">
-                        <div class="flex items-center mb-6">
-                            <div class="bg-pink-100 p-3 rounded-full mr-4">
-                                <i class="fas fa-trophy text-pink-600 text-2xl"></i>
+            <div class="flex flex-col lg:flex-row">
+                <div class="lg:w-1/3 mb-10 lg:mb-0 lg:pr-8">
+                    <div class="bg-gray-800 text-white p-8 rounded-xl shadow-xl h-full">
+                        <h3 class="title-font text-2xl font-bold mb-6">Rewards for Story Lovers</h3>
+
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="bg-pink-500 p-2 rounded-full mr-4">
+                                    <i class="fas fa-child text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold mb-2">For Kids</h4>
+                                    <p class="text-gray-300 text-sm">Earn fun avatars, badges, and unlock special
+                                        stories</p>
+                                </div>
                             </div>
-                            <div>
-                                <h3 class="title-font text-xl font-bold text-gray-800">Unlock Cultural Rewards</h3>
-                                <p class="text-gray-600 text-sm">Earn points by exploring your heritage</p>
+
+                            <div class="flex items-start">
+                                <div class="bg-blue-500 p-2 rounded-full mr-4">
+                                    <i class="fas fa-user-astronaut text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold mb-2">For Teens</h4>
+                                    <p class="text-gray-300 text-sm">Get access to exclusive events and competitions</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start">
+                                <div class="bg-purple-500 p-2 rounded-full mr-4">
+                                    <i class="fas fa-users text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold mb-2">For Families</h4>
+                                    <p class="text-gray-300 text-sm">Build points together as you engage and share
+                                        stories</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start">
+                                <div class="bg-yellow-500 p-2 rounded-full mr-4">
+                                    <i class="fas fa-trophy text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold mb-2">Monthly Competitions</h4>
+                                    <p class="text-gray-300 text-sm">Win prizes in cultural storytelling & quiz
+                                        challenges</p>
+                                </div>
                             </div>
                         </div>
-
-                        <div class="space-y-4 mb-6">
-                            <div class="flex items-center bg-gray-50 p-3 rounded-lg">
-                                <div class="bg-yellow-400 text-white p-2 rounded-full mr-3">
-                                    <i class="fas fa-star text-xs"></i>
-                                </div>
-                                <div>
-                                    <p class="font-medium text-gray-800">Complete a Diwali quest</p>
-                                    <p class="text-xs text-gray-500">+50 CuddlePoints</p>
-                                </div>
-                            </div>
-
-                            <div class="flex items-center bg-gray-50 p-3 rounded-lg">
-                                <div class="bg-blue-400 text-white p-2 rounded-full mr-3">
-                                    <i class="fas fa-book text-xs"></i>
-                                </div>
-                                <div>
-                                    <p class="font-medium text-gray-800">Finish a family folktale</p>
-                                    <p class="text-xs text-gray-500">+30 CuddlePoints</p>
-                                </div>
-                            </div>
-
-                            <div class="flex items-center bg-gray-50 p-3 rounded-lg">
-                                <div class="bg-green-400 text-white p-2 rounded-full mr-3">
-                                    <i class="fas fa-language text-xs"></i>
-                                </div>
-                                <div>
-                                    <p class="font-medium text-gray-800">Learn 10 new words</p>
-                                    <p class="text-xs text-gray-500">+20 CuddlePoints</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <a href="./demo.html"
-                            class="w-full bg-pink-500 hover:bg-pink-600 text-white py-3 rounded-lg font-medium transition flex items-center justify-center">
-                            <i class="fas fa-gift mr-2"></i> See Reward System
-                        </a>
                     </div>
                 </div>
 
-                <div class="md:w-1/2">
-                    <div class="bg-white p-8 rounded-xl shadow-md border border-gray-100">
-                        <h3 class="title-font text-xl font-bold text-gray-800 mb-6 text-center">Reward Gallery</h3>
+                <div class="lg:w-2/3">
+                    <div class="bg-gray-50 border border-gray-200 rounded-xl p-6">
+                        <h3 class="title-font text-xl font-bold text-gray-800 mb-6">Earning CuddlePoints</h3>
 
-                        <div class="grid grid-cols-3 gap-4 mb-6">
-                            <div class="bg-blue-50 p-4 rounded-lg text-center">
-                                <div
-                                    class="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-2">
-                                    <i class="fas fa-tshirt text-blue-600"></i>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                            <!-- Reward 1 -->
+                            <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100 flex items-start">
+                                <div class="bg-pink-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-book-open text-pink-600"></i>
                                 </div>
-                                <p class="text-xs font-medium">Cultural Outfit</p>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 mb-1">Complete a Story</h4>
+                                    <p class="text-gray-600 text-sm mb-2">Listen or watch a story to the end</p>
+                                    <span class="bg-pink-100 text-pink-800 text-xs px-2 py-1 rounded-full">+10
+                                        points</span>
+                                </div>
+                            </div>
+
+                            <!-- Reward 2 -->
+                            <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100 flex items-start">
+                                <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-comment text-blue-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 mb-1">Leave a Comment</h4>
+                                    <p class="text-gray-600 text-sm mb-2">Share your thoughts on a story</p>
+                                    <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">+5
+                                        points</span>
+                                </div>
+                            </div>
+
+                            <!-- Reward 3 -->
+                            <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100 flex items-start">
+                                <div class="bg-yellow-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-share-alt text-yellow-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 mb-1">Share a Story</h4>
+                                    <p class="text-gray-600 text-sm mb-2">Send to family or friends</p>
+                                    <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full">+15
+                                        points</span>
+                                </div>
+                            </div>
+
+                            <!-- Reward 4 -->
+                            <div class="bg-white p-4 rounded-lg shadow-sm border border-gray-100 flex items-start">
+                                <div class="bg-green-100 p-3 rounded-full mr-4">
+                                    <i class="fas fa-star text-green-600"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 mb-1">Daily Streak</h4>
+                                    <p class="text-gray-600 text-sm mb-2">Engage with stories 7 days in a row</p>
+                                    <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">+50
+                                        points</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 class="title-font text-xl font-bold text-gray-800 mb-4">Redeem Your Points</h3>
+
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <div class="bg-white p-3 rounded-lg border border-gray-200 text-center">
+                                <div
+                                    class="bg-pink-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-tshirt text-pink-600"></i>
+                                </div>
+                                <p class="text-sm font-medium">Cultural Avatar</p>
                                 <p class="text-xs text-gray-500">100 points</p>
                             </div>
 
-                            <div class="bg-yellow-50 p-4 rounded-lg text-center">
+                            <div class="bg-white p-3 rounded-lg border border-gray-200 text-center">
                                 <div
-                                    class="bg-yellow-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-2">
-                                    <i class="fas fa-sticky-note text-yellow-600"></i>
+                                    class="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-book text-blue-600"></i>
                                 </div>
-                                <p class="text-xs font-medium">Digital Stickers</p>
-                                <p class="text-xs text-gray-500">50 points</p>
-                            </div>
-
-                            <div class="bg-purple-50 p-4 rounded-lg text-center">
-                                <div
-                                    class="bg-purple-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-2">
-                                    <i class="fas fa-ticket-alt text-purple-600"></i>
-                                </div>
-                                <p class="text-xs font-medium">Museum Ticket</p>
-                                <p class="text-xs text-gray-500">200 points</p>
-                            </div>
-
-                            <div class="bg-green-50 p-4 rounded-lg text-center">
-                                <div
-                                    class="bg-green-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-2">
-                                    <i class="fas fa-users text-green-600"></i>
-                                </div>
-                                <p class="text-xs font-medium">Grandparent Call</p>
+                                <p class="text-sm font-medium">Exclusive Story</p>
                                 <p class="text-xs text-gray-500">150 points</p>
                             </div>
 
-                            <div class="bg-red-50 p-4 rounded-lg text-center">
+                            <div class="bg-white p-3 rounded-lg border border-gray-200 text-center">
                                 <div
-                                    class="bg-red-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-2">
-                                    <i class="fas fa-bookmark text-red-600"></i>
+                                    class="bg-yellow-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-ticket-alt text-yellow-600"></i>
                                 </div>
-                                <p class="text-xs font-medium">Storybook</p>
-                                <p class="text-xs text-gray-500">180 points</p>
+                                <p class="text-sm font-medium">Event Pass</p>
+                                <p class="text-xs text-gray-500">200 points</p>
                             </div>
 
-                            <div class="bg-pink-50 p-4 rounded-lg text-center">
+                            <div class="bg-white p-3 rounded-lg border border-gray-200 text-center">
                                 <div
-                                    class="bg-pink-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-2">
-                                    <i class="fas fa-crown text-pink-600"></i>
+                                    class="bg-purple-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-2">
+                                    <i class="fas fa-users text-purple-600"></i>
                                 </div>
-                                <p class="text-xs font-medium">Special Badge</p>
+                                <p class="text-sm font-medium">Family Call</p>
                                 <p class="text-xs text-gray-500">250 points</p>
-                            </div>
-                        </div>
-
-                        <div class="bg-gray-50 border border-gray-200 rounded-lg p-4">
-                            <div class="flex items-center">
-                                <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
-                                    alt="Child with reward" class="w-16 h-16 rounded-full object-cover mr-4">
-                                <div>
-                                    <p class="text-sm font-medium text-gray-800">"We anticipate this reward system will
-                                        drive 2x more engagement than standard apps"</p>
-                                    <p class="text-xs text-gray-500">- Early Beta Tester</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Dashboard Section -->
-    <section class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
-                    <h2 class="title-font text-3xl md:text-4xl font-bold text-gray-800 mb-6">
-                        Track Growth on a <span class="text-pink-500">Cultural Dashboard</span>
-                    </h2>
-                    <p class="text-gray-600 mb-6">
-                        Interactive dashboards will help families stay engaged with their heritage journey and celebrate
-                        milestones.
-                    </p>
-
-                    <div class="space-y-4">
-                        <div class="flex items-center">
-                            <div class="bg-green-100 p-2 rounded-full mr-4">
-                                <i class="fas fa-chart-line text-green-600"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-gray-800">Progress Tracking</h4>
-                                <p class="text-gray-600 text-sm">See which cultural topics your child has explored</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center">
-                            <div class="bg-blue-100 p-2 rounded-full mr-4">
-                                <i class="fas fa-lightbulb text-blue-600"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-gray-800">Personalized Suggestions</h4>
-                                <p class="text-gray-600 text-sm">Get recommendations for weekend traditions, songs, or
-                                    games</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center">
-                            <div class="bg-purple-100 p-2 rounded-full mr-4">
-                                <i class="fas fa-award text-purple-600"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-gray-800">Milestone Celebrations</h4>
-                                <p class="text-gray-600 text-sm">Celebrate achievements like "Learned 50 words in
-                                    Yoruba!"</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <a href="./demo.html"
-                        class="mt-8 bg-pink-500 hover:bg-pink-600 text-white px-6 py-3 rounded-full font-medium transition shadow-md flex items-center">
-                        <i class="fas fa-chart-pie mr-2"></i> View Sample Dashboard
-                    </a>
-                </div>
-
-                <div class="md:w-1/2">
-                    <div class="bg-gray-800 p-6 rounded-xl shadow-xl">
-                        <div class="flex justify-between items-center mb-6">
-                            <h3 class="text-white font-medium">Cultural Journey Dashboard</h3>
-                            <div class="flex space-x-2">
-                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
-                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                            </div>
-                        </div>
-
-                        <div class="bg-gray-900 rounded-lg p-4 mb-4">
-                            <div class="flex justify-between items-center mb-3">
-                                <h4 class="text-pink-400 text-sm font-medium">Language Progress</h4>
-                                <span class="text-xs text-gray-400">Spanish</span>
-                            </div>
-                            <div class="w-full bg-gray-700 rounded-full h-2 mb-2">
-                                <div class="bg-pink-500 h-2 rounded-full" style="width: 65%"></div>
-                            </div>
-                            <div class="flex justify-between text-xs text-gray-400">
-                                <span>0 words</span>
-                                <span>50 words</span>
-                                <span>100 words</span>
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-4 mb-4">
-                            <div class="bg-gray-900 rounded-lg p-4">
-                                <h4 class="text-blue-400 text-sm font-medium mb-2">Stories Read</h4>
-                                <p class="text-white text-2xl font-bold">24</p>
-                                <p class="text-xs text-gray-400">+5 this week</p>
-                            </div>
-
-                            <div class="bg-gray-900 rounded-lg p-4">
-                                <h4 class="text-yellow-400 text-sm font-medium mb-2">CuddlePoints</h4>
-                                <p class="text-white text-2xl font-bold">320</p>
-                                <p class="text-xs text-gray-400">100 to next reward</p>
-                            </div>
-                        </div>
-
-                        <div class="bg-gray-900 rounded-lg p-4">
-                            <h4 class="text-green-400 text-sm font-medium mb-3">Recent Achievements</h4>
-                            <div class="space-y-3">
-                                <div class="flex items-center">
-                                    <div class="bg-green-500 text-white p-1 rounded-full mr-2">
-                                        <i class="fas fa-check text-xs"></i>
-                                    </div>
-                                    <p class="text-white text-xs">Learned about Diwali</p>
-                                </div>
-                                <div class="flex items-center">
-                                    <div class="bg-blue-500 text-white p-1 rounded-full mr-2">
-                                        <i class="fas fa-check text-xs"></i>
-                                    </div>
-                                    <p class="text-white text-xs">Completed 3 Mexican folktales</p>
-                                </div>
-                                <div class="flex items-center">
-                                    <div class="bg-purple-500 text-white p-1 rounded-full mr-2">
-                                        <i class="fas fa-check text-xs"></i>
-                                    </div>
-                                    <p class="text-white text-xs">Made tamales with abuela</p>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -684,16 +981,19 @@
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
                 <h2 class="title-font text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-                    Why Families <span class="text-pink-500">Are Excited</span>
+                    What Families <span class="text-pink-500">Are Saying</span>
                 </h2>
+                <p class="max-w-2xl mx-auto text-gray-600">
+                    Hear from early testers about their experience with CuddleTales.
+                </p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Testimonial 1 -->
                 <div class="bg-white p-8 rounded-xl border border-gray-100 culture-card">
                     <div class="flex items-center mb-6">
-                        <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
-                            alt="Family" class="w-16 h-16 rounded-full object-cover mr-4">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+                            alt="Professional woman" class="w-16 h-16 rounded-full object-cover mr-4">
                         <div>
                             <h4 class="font-bold text-gray-800">Cultural Experts Say</h4>
                             <p class="text-sm text-gray-600">Early projections show</p>
@@ -703,12 +1003,19 @@
                         "This platform has potential to become the go-to resource for intercultural family bonding
                         through storytelling."
                     </p>
+                    <div class="flex">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
                 </div>
 
                 <!-- Testimonial 2 -->
                 <div class="bg-white p-8 rounded-xl border border-gray-100 culture-card">
                     <div class="flex items-center mb-6">
-                        <img src="https://images.unsplash.com/photo-1580489944761-15a05d5ae739?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+                        <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
                             alt="Family" class="w-16 h-16 rounded-full object-cover mr-4">
                         <div>
                             <h4 class="font-bold text-gray-800">Beta Testers Report</h4>
@@ -719,22 +1026,35 @@
                         "Parents in our trials were 3x more likely to share family stories using this platform compared
                         to traditional methods."
                     </p>
+                    <div class="flex">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star-half-alt text-yellow-400"></i>
+                    </div>
                 </div>
 
                 <!-- Testimonial 3 -->
                 <div class="bg-white p-8 rounded-xl border border-gray-100 culture-card">
                     <div class="flex items-center mb-6">
-                        <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
-                            alt="Family" class="w-16 h-16 rounded-full object-cover mr-4">
+                        <img src="https://images.unsplash.com/photo-1580489944761-15a05d5ae739?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+                            alt="Grandmother" class="w-16 h-16 rounded-full object-cover mr-4">
                         <div>
-                            <h4 class="font-bold text-gray-800">Educators Predict</h4>
+                            <h4 class="font-bold text-gray-800">Grandparents Love It</h4>
                             <p class="text-sm text-gray-600">Based on early testing</p>
                         </div>
                     </div>
                     <p class="text-gray-600 mb-6 italic">
-                        "This could revolutionize how immigrant families maintain cultural connections across
-                        generations."
+                        "Finally a way to share my life stories with my grandkids who live across the country!"
                     </p>
+                    <div class="flex">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
                 </div>
             </div>
         </div>
@@ -744,10 +1064,10 @@
     <section class="py-20 hero-gradient">
         <div class="container mx-auto px-6 text-center">
             <h2 class="title-font text-3xl md:text-5xl font-bold text-gray-800 mb-6">
-                More Than an App. A <span class="text-pink-600">Digital Heirloom</span>.
+                Preserve the Wisdom of Yesterday <span class="text-pink-600">for Tomorrow's Dreamers</span>
             </h2>
             <p class="text-xl text-gray-700 max-w-3xl mx-auto mb-10">
-                Coming soon to help preserve your family's stories and spirit for the next generation.
+                Join us in creating a digital heirloom of stories that will connect generations for years to come.
             </p>
             <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
                 <a href='https://docs.google.com/forms/d/e/1FAIpQLSeds2PYKUbB4TFDcYkxG80oFCcmahOu-1ye1rvqL6UtyoRehw/viewform'
@@ -773,7 +1093,7 @@
                                 class="text-pink-500">Tales</span></span>
                     </div>
                     <p class="text-gray-400 mb-4">
-                        Where heritage becomes a bedtime story. Coming soon.
+                        Where grandparents' stories come to life. Coming soon.
                     </p>
                     <div class="flex space-x-4">
                         <a href="#" class="text-gray-400 hover:text-pink-500 transition">
@@ -794,22 +1114,21 @@
                 <div>
                     <h4 class="title-font text-lg font-bold mb-4">Features</h4>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition">Cultural Stories</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition">Parent Tools</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition">Age Groups</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition">Culture Circles</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition">CuddlePoints</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Story Feed</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Categories</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Parental Controls</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Connect Rooms</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Rewards</a></li>
                     </ul>
                 </div>
 
                 <div>
-                    <h4 class="title-font text-lg font-bold mb-4">Resources</h4>
+                    <h4 class="title-font text-lg font-bold mb-4">For Elders</h4>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition">Blog</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition">Cultural Guides</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition">FAQ</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition">Parent Resources</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition">Educators</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Share Your Stories</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Earning Potential</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Getting Started</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Success Stories</a></li>
                     </ul>
                 </div>
 
