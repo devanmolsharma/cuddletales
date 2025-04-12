@@ -43,7 +43,26 @@
             border-radius: 12px;
         }
 
+        .video-card {
+            background-size: cover;
+            background-position: center;
+            height: 220px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+
         .story-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
+            padding: 15px;
+            color: white;
+        }
+
+        .video-overlay {
             position: absolute;
             bottom: 0;
             left: 0;
@@ -73,6 +92,22 @@
             border-radius: 50%;
             background-color: #ec4899;
         }
+
+        .video-player {
+            position: relative;
+            padding-bottom: 56.25%;
+            /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-player iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
     </style>
 </head>
 
@@ -86,8 +121,10 @@
             const [activeTab, setActiveTab] = useState('home');
             const [language, setLanguage] = useState('english');
             const [currentStory, setCurrentStory] = useState(null);
+            const [currentVideo, setCurrentVideo] = useState(null);
             const [showLanguageModal, setShowLanguageModal] = useState(false);
             const [showStoryModal, setShowStoryModal] = useState(false);
+            const [showVideoModal, setShowVideoModal] = useState(false);
 
             const stories = [
                 {
@@ -122,6 +159,45 @@
                 }
             ];
 
+            const shorts = [
+                {
+                    id: 1,
+                    title: "How to Make Tamales",
+                    culture: "Mexican",
+                    duration: "1:23",
+                    views: "1.2K",
+                    thumbnail: "https://images.unsplash.com/photo-1601050690597-df0568f70950?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    videoId: "dQw4w9WgXcQ" // Just a placeholder ID
+                },
+                {
+                    id: 2,
+                    title: "African Drum Patterns",
+                    culture: "West African",
+                    duration: "0:45",
+                    views: "2.4K",
+                    thumbnail: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    videoId: "dQw4w9WgXcQ"
+                },
+                {
+                    id: 3,
+                    title: "Chinese Calligraphy",
+                    culture: "Chinese",
+                    duration: "1:15",
+                    views: "3.1K",
+                    thumbnail: "https://images.unsplash.com/photo-1527474305487-b87b222841cc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    videoId: "dQw4w9WgXcQ"
+                },
+                {
+                    id: 4,
+                    title: "Native American Dance",
+                    culture: "Cherokee",
+                    duration: "0:58",
+                    views: "1.8K",
+                    thumbnail: "https://images.unsplash.com/photo-1545912452-8aea7e25a3d3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                    videoId: "dQw4w9WgXcQ"
+                }
+            ];
+
             const userPoints = 120;
 
             const openStory = (story) => {
@@ -129,8 +205,17 @@
                 setShowStoryModal(true);
             };
 
+            const openVideo = (video) => {
+                setCurrentVideo(video);
+                setShowVideoModal(true);
+            };
+
             const closeStory = () => {
                 setShowStoryModal(false);
+            };
+
+            const closeVideo = () => {
+                setShowVideoModal(false);
             };
 
             const toggleLanguage = () => {
@@ -202,6 +287,34 @@
 
                                 <div className="mb-6">
                                     <div className="flex justify-between items-center mb-3">
+                                        <h3 className="font-bold">Cultural Shorts</h3>
+                                        <button className="text-pink-500 text-sm">See All</button>
+                                    </div>
+                                    <div className="flex space-x-3 overflow-x-auto pb-2">
+                                        {shorts.map(video => (
+                                            <div
+                                                key={video.id}
+                                                className="video-card flex-shrink-0 w-40"
+                                                style={{ backgroundImage: `url(${video.thumbnail})` }}
+                                                onClick={() => openVideo(video)}
+                                            >
+                                                <div className="absolute top-2 right-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
+                                                    {video.duration}
+                                                </div>
+                                                <div className="video-overlay">
+                                                    <h3 className="font-bold text-sm">{video.title}</h3>
+                                                    <div className="flex justify-between items-center mt-1">
+                                                        <span className="text-xs">{video.views} views</span>
+                                                        <span className="text-xs bg-black bg-opacity-30 px-2 py-1 rounded">{video.culture}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div className="mb-6">
+                                    <div className="flex justify-between items-center mb-3">
                                         <h3 className="font-bold">Cultural Activities</h3>
                                         <button className="text-pink-500 text-sm">See All</button>
                                     </div>
@@ -245,6 +358,29 @@
                                         <h3 className="font-bold">Native American</h3>
                                         <p className="text-xs">7 stories</p>
                                     </div>
+                                </div>
+
+                                <h2 className="title-font text-2xl font-bold my-4">Popular Shorts</h2>
+                                <div className="grid grid-cols-2 gap-3">
+                                    {shorts.map(video => (
+                                        <div
+                                            key={video.id}
+                                            className="video-card"
+                                            style={{ backgroundImage: `url(${video.thumbnail})` }}
+                                            onClick={() => openVideo(video)}
+                                        >
+                                            <div className="absolute top-2 right-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
+                                                {video.duration}
+                                            </div>
+                                            <div className="video-overlay">
+                                                <h3 className="font-bold text-sm">{video.title}</h3>
+                                                <div className="flex justify-between items-center mt-1">
+                                                    <span className="text-xs">{video.views} views</span>
+                                                    <span className="text-xs bg-black bg-opacity-30 px-2 py-1 rounded">{video.culture}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
                         )}
@@ -450,6 +586,62 @@
                                 <div className="p-4 border-t">
                                     <button className="w-full bg-pink-500 text-white py-3 rounded-lg font-medium flex items-center justify-center">
                                         <i className="fas fa-play mr-2"></i> Read Story
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Video Modal */}
+                    {showVideoModal && currentVideo && (
+                        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+                            <div className="bg-white rounded-xl w-full h-full max-w-sm max-h-[90vh] flex flex-col">
+                                <div className="relative">
+                                    <div className="video-player">
+                                        {/* This is just a placeholder - in a real app you'd use actual video content */}
+                                        <iframe
+                                            src={`https://www.youtube.com/embed/${currentVideo.videoId}?autoplay=1`}
+                                            frameBorder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowFullScreen
+                                        ></iframe>
+                                    </div>
+                                    <button
+                                        className="absolute top-4 right-4 bg-black bg-opacity-50 text-white w-8 h-8 rounded-full flex items-center justify-center"
+                                        onClick={closeVideo}
+                                    >
+                                        <i className="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <div className="p-4 flex-1 overflow-y-auto">
+                                    <h2 className="title-font text-xl font-bold">{currentVideo.title}</h2>
+                                    <div className="flex items-center space-x-4 my-3">
+                                        <span className="bg-pink-100 text-pink-800 px-2 py-1 rounded-full text-xs">
+                                            {currentVideo.culture}
+                                        </span>
+                                        <span className="text-gray-600 text-sm">
+                                            <i className="fas fa-eye mr-1"></i>
+                                            {currentVideo.views} views
+                                        </span>
+                                    </div>
+                                    <p className="text-gray-700 mb-4">
+                                        Learn about {currentVideo.culture.toLowerCase()} culture through this short video. {currentVideo.title.includes('Drum') ? 'Discover traditional rhythms and their meanings.' : currentVideo.title.includes('Calligraphy') ? 'See how beautiful characters are created with brush strokes.' : currentVideo.title.includes('Dance') ? 'Watch traditional dance movements and their significance.' : 'Learn to make authentic dishes with cultural significance.'}
+                                    </p>
+                                    <div className="mb-4">
+                                        <h3 className="font-bold mb-2">Discussion Questions:</h3>
+                                        <ul className="list-disc pl-5 text-gray-700 text-sm space-y-1">
+                                            <li>What did you find most interesting about this video?</li>
+                                            <li>How is this similar or different to traditions in our family?</li>
+                                            <li>What would you like to try from what you saw?</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div className="p-4 border-t flex justify-between">
+                                    <button className="bg-pink-500 text-white px-4 py-2 rounded-lg font-medium flex items-center">
+                                        <i className="fas fa-heart mr-2"></i> Like
+                                    </button>
+                                    <button className="bg-white border border-pink-500 text-pink-500 px-4 py-2 rounded-lg font-medium flex items-center">
+                                        <i className="fas fa-share mr-2"></i> Share
                                     </button>
                                 </div>
                             </div>
