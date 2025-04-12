@@ -157,60 +157,98 @@
         const stories = [
             {
                 id: 1,
-                title: "Grandpa's Fishing Adventure",
-                storyteller: "Grandpa Joe",
-                age: "72",
-                relation: "Grandfather",
+                title: "Short Story 1",
+                storyteller: "Unknown",
+                age: "N/A",
+                relation: "N/A",
                 category: "Adventure",
-                culture: "American",
-                duration: "4:32",
-                likes: "1.2K",
-                comments: 42,
-                views: "15.7K",
+                culture: "Global",
+                duration: "N/A",
+                likes: "N/A",
+                comments: "N/A",
+                views: "N/A",
                 isVideo: true,
-                media: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                media: "https://www.youtube.com/embed/Nu_WSlcfndw?autoplay=1",
                 audio: null,
-                description: "The time I got lost at sea for 3 days and what it taught me about perseverance",
-                tags: ["fishing", "ocean", "life lessons"],
+                description: "A short adventure story.",
+                tags: ["adventure", "short"],
                 language: "english"
             },
             {
                 id: 2,
-                title: "Nani's Diwali Memories",
-                storyteller: "Nani Asha",
-                age: "68",
-                relation: "Grandmother",
-                category: "Cultural",
-                culture: "Indian",
-                duration: "6:15",
-                likes: "3.4K",
-                comments: 128,
-                views: "45.2K",
-                isVideo: false,
-                media: "https://images.unsplash.com/photo-1603653962920-d9d70d7c5a92?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-                audio: "https://example.com/audio1.mp3",
-                description: "How we celebrated Diwali in my village when I was a little girl",
-                tags: ["diwali", "india", "festivals"],
-                language: "hindi"
+                title: "Short Story 2",
+                storyteller: "Unknown",
+                age: "N/A",
+                relation: "N/A",
+                category: "Adventure",
+                culture: "Global",
+                duration: "N/A",
+                likes: "N/A",
+                comments: "N/A",
+                views: "N/A",
+                isVideo: true,
+                media: "https://www.youtube.com/embed/aLChhOH1u0c?autoplay=1",
+                audio: null,
+                description: "A short adventure story.",
+                tags: ["adventure", "short"],
+                language: "english"
             },
             {
                 id: 3,
-                title: "The War Story",
-                storyteller: "Opa Heinrich",
-                age: "89",
-                relation: "Grandfather",
-                category: "Historical",
-                culture: "German",
-                duration: "8:42",
-                likes: "5.7K",
-                comments: 231,
-                views: "89.3K",
+                title: "Short Story 3",
+                storyteller: "Unknown",
+                age: "N/A",
+                relation: "N/A",
+                category: "Adventure",
+                culture: "Global",
+                duration: "N/A",
+                likes: "N/A",
+                comments: "N/A",
+                views: "N/A",
                 isVideo: true,
-                media: "https://images.unsplash.com/photo-1518655048521-f130df041f66?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                media: "https://www.youtube.com/embed/J6DpbgPvpdE?autoplay=1",
                 audio: null,
-                description: "My experiences as a child during WWII and the kindness that saved our family",
-                tags: ["war", "history", "family"],
-                language: "german"
+                description: "A short adventure story.",
+                tags: ["adventure", "short"],
+                language: "english"
+            },
+            {
+                id: 4,
+                title: "Short Story 4",
+                storyteller: "Unknown",
+                age: "N/A",
+                relation: "N/A",
+                category: "Adventure",
+                culture: "Global",
+                duration: "N/A",
+                likes: "N/A",
+                comments: "N/A",
+                views: "N/A",
+                isVideo: true,
+                media: "https://www.youtube.com/embed/Jmc_edN_ro8?autoplay=1",
+                audio: null,
+                description: "A short adventure story.",
+                tags: ["adventure", "short"],
+                language: "english"
+            },
+            {
+                id: 5,
+                title: "Short Story 5",
+                storyteller: "Unknown",
+                age: "N/A",
+                relation: "N/A",
+                category: "Adventure",
+                culture: "Global",
+                duration: "N/A",
+                likes: "N/A",
+                comments: "N/A",
+                views: "N/A",
+                isVideo: true,
+                media: "https://www.youtube.com/embed/ccIBYVx3GbQ?autoplay=1",
+                audio: null,
+                description: "A short adventure story.",
+                tags: ["adventure", "short"],
+                language: "english"
             }
         ];
 
@@ -360,11 +398,13 @@
                                         >
                                             {story.isVideo ? (
                                                 <div className="video-player">
-                                                    <img
+                                                    <iframe
                                                         src={story.media}
-                                                        alt={story.title}
-                                                        className="w-full h-full object-cover"
-                                                    />
+                                                        frameborder="0"
+                                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                        allowfullscreen
+                                                        className="w-full h-full"
+                                                    ></iframe>
                                                 </div>
                                             ) : (
                                                 <div className="h-full w-full relative ambient-bg">
