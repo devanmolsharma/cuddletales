@@ -624,6 +624,44 @@
                         )}
                     </div>
 
+                    {activeTab === 'profile' && (
+                        <div className="p-4 overflow-y-auto h-full">
+                            <h2 className="title-font text-2xl font-bold mb-4">Your Profile</h2>
+                            <div className="bg-white rounded-lg shadow p-4 mb-6">
+                                <div className="flex items-center mb-4">
+                                    <div className="w-16 h-16 rounded-full bg-orange-100 flex items-center justify-center text-orange-500 text-2xl font-bold">
+                                        <i className="fas fa-user"></i>
+                                    </div>
+                                    <div className="ml-4">
+                                        <h3 className="font-bold text-lg">Bill</h3>
+                                        <p className="text-sm text-gray-600">MR Bill Jr</p>
+                                    </div>
+                                </div>
+                                <button className="w-full bg-orange-500 text-white py-2 rounded-lg font-medium">
+                                    Edit Profile
+                                </button>
+                            </div>
+
+                            <div className="bg-white rounded-lg shadow p-4">
+                                <h4 className="font-bold mb-3">Account Details</h4>
+                                <div className="space-y-2">
+                                    <div className="flex justify-between">
+                                        <span className="text-gray-600">Subscription</span>
+                                        <span className="font-medium text-orange-500">Premium</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span className="text-gray-600">CuddlePoints</span>
+                                        <span className="font-medium">1,250</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span className="text-gray-600">Joined</span>
+                                        <span className="font-medium">January 2023</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
                     {/* Bottom Navigation */}
                     <div className="bottom-nav bg-white p-3 flex justify-around">
                         <button
@@ -655,7 +693,7 @@
                         </button>
                         <button
                             className={`flex flex-col items-center ${activeTab === 'profile' ? 'active-tab' : 'text-gray-500'}`}
-                            onClick={() => setShowProfileModal(true)}
+                            onClick={() => setActiveTab('profile')}
                         >
                             <i className="fas fa-user text-xl"></i>
                             <span className="text-xs mt-1">Profile</span>
@@ -1019,6 +1057,7 @@
                             </div>
                         </div>
                     )}
+
 
                     {/* Audio Element (hidden) */}
                     <audio
