@@ -616,7 +616,7 @@ function Dashboard() {
                 <h3 className="font-medium text-indigo-800 mb-1">Pro Tip</h3>
                 <p className="text-sm text-indigo-700">
                   Celebrate small wins! Consider adding a special reward when
-                  your child completes 5 books.
+                  your child completes 5 stories.
                 </p>
               </div>
             </div>
